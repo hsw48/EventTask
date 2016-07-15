@@ -1,0 +1,6 @@
+framework module Pods_EventTask {
+  umbrella header "Pods-EventTask-umbrella.h"
+
+  export *
+  module * { export * }
+}
