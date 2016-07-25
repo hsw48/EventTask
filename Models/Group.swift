@@ -7,16 +7,23 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseAuth
+
 
 class Group {
     var name : String
-    var noOfMembers = 1
-    var noClaimed = 0
-    var noUnclaimed = 0
-    var users : [User] = []
-    var tasks : [Task] = []
+    var noOfMembers : Int
+    var noClaimed : Int
+    var noUnclaimed : Int
+    var userNames : [String] = []
+    var userIds : [String] = []
+    var tasks : [String] = []
     
     init(name: String) {
         self.name = name
+        self.noUnclaimed = 0
+        self.noClaimed = 0
+        self.noOfMembers = 1
     }
 }

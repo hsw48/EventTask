@@ -8,9 +8,21 @@ target 'EventTask' do
   # Pods for EventTask
 
     pod 'Firebase'
-    pod 'Firebase/Auth'
     pod 'FBSDKCoreKit'
     pod 'FBSDKLoginKit'
     pod 'FBSDKShareKit'
+    
+    pod 'Firebase/AdMob'
+    pod 'Firebase/Analytics'
+    pod 'Firebase/AppIndexing'
+    pod 'Firebase/Auth'
+    pod 'Firebase/Crash'
+    pod 'Firebase/Database'
+    pod 'Firebase/DynamicLinks'
+    pod 'Firebase/Invites'
+    pod 'Firebase/Messaging'
+    pod 'Firebase/RemoteConfig'
+    pod 'Firebase/Storage'
+ 
 
 end

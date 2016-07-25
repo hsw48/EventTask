@@ -7,22 +7,25 @@
 //
 
 import Foundation
+import Firebase
 
 
 class Task {
     var name : String
-    var datePosted : NSDate
-    var dateClaimed : NSDate?
+    var body : String
+    var datePosted : String
+    var dateClaimed : String?
     var claimed : Bool = false
-    var userClaimed : User?
-    var userPosted: User
-    var group : Group
+    var userClaimed : FIRUser?
+    var userPosted: String
+    var groupId : String?
     
-    init(name: String, datePosted: NSDate, userPosted: User, group: Group) {
+    init(name: String, body: String, datePosted: String, userPosted: String, groupId: String) {
         self.name = name
+        self.body = body
         self.datePosted = datePosted
         self.userPosted = userPosted
-        self.group = group
+        self.groupId = groupId
         
     }
     

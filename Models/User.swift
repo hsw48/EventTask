@@ -7,18 +7,12 @@
 //
 
 import Foundation
+import FirebaseDatabase
+import Firebase
 
-
-class User {
-    var name : String
-    var email : String
-    var pw : String
+class User: FIRUser {
+    
     var groups : [Group] = []
     var tasks : [Task] = []
     
-    init(name: String, email: String, pw: String){
-        self.name = name
-        self.email = email
-        self.pw = pw
-    }
 }

@@ -12,7 +12,8 @@ class GroupTableViewCell: UITableViewCell {
 
     @IBOutlet weak var groupNameLabel: UILabel!
     
-    @IBOutlet weak var noMembersLabel: UILabel!
+    @IBOutlet weak var noOfMembersLabel: UILabel!
+    
     @IBOutlet weak var noUnclaimedLabel: UILabel!
     
     
