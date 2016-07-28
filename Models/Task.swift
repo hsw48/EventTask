@@ -11,14 +11,16 @@ import Firebase
 
 
 class Task {
+    
     var name : String
     var body : String
     var datePosted : String
     var dateClaimed : String?
-    var claimed : Bool = false
-    var userClaimed : FIRUser?
+    var claimed : NSNumber = 0
+    var userClaimed : String?
     var userPosted: String
     var groupId : String?
+    var done : NSNumber = 0
     
     init(name: String, body: String, datePosted: String, userPosted: String, groupId: String) {
         self.name = name

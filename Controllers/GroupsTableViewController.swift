@@ -17,16 +17,18 @@ import FBSDKLoginKit
 class GroupsTableViewController: UITableViewController {
     var groupKeys = [String]()
     var groupUrl = [String]()
+    var groups = [Group]()
+    var ref : FIRDatabaseReference?
+    var groupNames = [String]()
 
     @IBAction func logoutButtonPressed(sender: AnyObject) {
+      
     }
 
-    var groups = [Group]()
-
-    var ref :FIRDatabaseReference?
+  
 
     override func viewDidLoad(){
-     ref = FIRDatabase.database().reference()
+    // ref = FIRDatabase.database().reference()
         
         self.tableView.reloadData()
         
@@ -40,29 +42,33 @@ class GroupsTableViewController: UITableViewController {
         let CURRENT_USER_GROUPS_REF = ref!.child("Users").child((FIRAuth.auth()?.currentUser!.uid)!).child("groups")
         CURRENT_USER_GROUPS_REF.observeEventType(.Value, withBlock: { snapshot in
             //create array of user's groups
-            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                var tempItems = [FIRDataSnapshot]()
-                for snap in snapshots {
-                    tempItems.append(snap)
+            if self.groupKeys.count < snapshot.children.allObjects.count {
+                if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                    var tempItems = [FIRDataSnapshot]()
+                    self.groupKeys = []
+                    self.groupUrl = []
+                    for snap in snapshots {
+                        tempItems.append(snap)
+                    }
+                    // get user's group keys
+                    for item in tempItems {
+                        self.groupKeys.append(item.key)
+                    }
+                    // get user's group urls
+                    for item in tempItems {
+                        self.groupUrl.append(String(item.value))
+                    }
+                    
+                    self.tableView.reloadData()
                 }
-                // get user's group keys
-                for item in tempItems {
-                    self.groupKeys.append(item.key)
-                }
-                // get user's group urls
-                for item in tempItems {
-                    self.groupUrl.append(String(item.value))
-                }
-                self.tableView.reloadData()
             }
         })
     }
     
     override func viewDidAppear(animated: Bool){
         super.viewDidAppear(true)
-        
-       
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -74,7 +80,7 @@ class GroupsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let rowCount = groupKeys.count
-        print("groupkeys : \(groupKeys)")
+       // print("groupkeys : \(groupKeys.count)")
         return rowCount
     }
 
@@ -88,15 +94,16 @@ class GroupsTableViewController: UITableViewController {
         //set labels of group cells
         let ref = FIRDatabase.database().reference()
         let nameRef = ref.child("Groups").child(groupKeys[row]).child("name")
-        _ = nameRef.observeEventType(.Value, withBlock: { snapshot in
+        nameRef.observeEventType(.Value, withBlock: { snapshot in
+            self.groupNames.append(String(snapshot.value!))
             cell.groupNameLabel.text = String(snapshot.value!)
         })
         let unclaimedRef = ref.child("Groups").child(groupKeys[row]).child("noUnclaimed")
-        _ = unclaimedRef.observeEventType(.Value, withBlock: { snapshot in
+        unclaimedRef.observeEventType(.Value, withBlock: { snapshot in
             cell.noUnclaimedLabel.text = "Unclaimed Tasks: \(String(snapshot.value!))"
         })
         let membersRef = ref.child("Groups").child(groupKeys[row]).child("noOfMembers")
-        _ = membersRef.observeEventType(.Value, withBlock: { snapshot in
+        membersRef.observeEventType(.Value, withBlock: { snapshot in
             cell.noOfMembersLabel.text = "Members: \(String(snapshot.value!))"
         })
         
@@ -105,7 +112,7 @@ class GroupsTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        let newGroup = Group(name: "temp")
+       
         
             if segue.identifier == "displayGroup" {
                 let displayGroupViewController = segue.destinationViewController as! DisplayGroupViewController
@@ -116,45 +123,44 @@ class GroupsTableViewController: UITableViewController {
                 let ref = FIRDatabase.database().reference()
             
                 let groupRef = ref.child("Groups").child(groupId)
-
-                   _ = groupRef.child("name").observeEventType(.Value, withBlock: { snapshot in
-                    newGroup.name = String(snapshot.value!)
-                    print("snapshot \(snapshot.value!)")
-                })
-                _ = groupRef.child("noClaimed").observeEventType(.Value, withBlock: { snapshot in
+                
+                let newGroup = Group(name: self.groupNames[indexPath.row])
+                
+//                groupRef.child("name").observeEventType(.Value, withBlock: { snapshot in
+//                    newGroup.name = String(snapshot.value!)
+//                  //  print("snapshot \(snapshot.value!)")
+//                })
+                groupRef.child("noClaimed").observeEventType(.Value, withBlock: { snapshot in
                     newGroup.noClaimed = (snapshot.value as! Int)
-                    print("snapshot2 \(snapshot.value as! Int)")
+                   // print("snapshot2 \(snapshot.value as! Int)")
                 })
-                _ = groupRef.child("noOfMembers").observeEventType(.Value, withBlock: { snapshot in
+                groupRef.child("noOfMembers").observeEventType(.Value, withBlock: { snapshot in
                     newGroup.noOfMembers = (snapshot.value as! Int)
-                    print("snapshot3 \(snapshot.value as! Int)")
+                   // print("snapshot3 \(snapshot.value as! Int)")
                 })
-                _ = groupRef.child("noUnclaimed").observeEventType(.Value, withBlock: { snapshot in
+                groupRef.child("noUnclaimed").observeEventType(.Value, withBlock: { snapshot in
                     newGroup.noUnclaimed = (snapshot.value as! Int)
-                    print("snapshot4 \(snapshot.value as! Int)")
+                   // print("snapshot4 \(snapshot.value as! Int)")
                 })
-                _ = groupRef.child("userNames").observeEventType(.Value, withBlock: { snapshot in
+                groupRef.child("userNames").observeEventType(.Value, withBlock: { snapshot in
                    newGroup.userNames = (snapshot.value as! [String])
-                    print("snapshot5 \(snapshot.value as! [String])")
+                  //  print("snapshot5 \(snapshot.value as! [String])")
                 })
-                _ = groupRef.child("userIds").observeEventType(.Value, withBlock: { snapshot in
+                groupRef.child("userIds").observeEventType(.Value, withBlock: { snapshot in
                     newGroup.userIds = (snapshot.value as! [String])
-                    print("snapshot6 \(snapshot.value as! [String])")
+                 //   print("snapshot6 \(snapshot.value as! [String])")
                     
                 })
                 
-                displayGroupViewController.group = newGroup
-                displayGroupViewController.groupId = groupId
+                    displayGroupViewController.group = newGroup
+                    displayGroupViewController.groupId = groupId
             }
          else if segue.identifier == "addGroup" {
-                let createGroupViewController = segue.destinationViewController as! CreateGroupViewController
+                segue.destinationViewController as! CreateGroupViewController
             }
-                
-       
     }
     
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
         return false
     }
 

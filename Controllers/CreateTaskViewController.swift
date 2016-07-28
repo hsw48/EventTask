@@ -20,6 +20,9 @@ class CreateTaskViewController: UIViewController {
     var groupId : String?
    
     override func viewDidLoad() {
+       nameTextField.delegate = self
+        bodyTextView.delegate = self
+        
         super.viewDidLoad()
     }
     
@@ -42,12 +45,17 @@ class CreateTaskViewController: UIViewController {
             displayGroupViewController.groupId = groupId
             
             group!.noUnclaimed += 1
-
-            print("unclaimed: \(group!.noUnclaimed)")
             
-            let task = Task(name: nameTextField.text! ,body:bodyTextView.text, datePosted: "10/3/1994", userPosted: (FIRAuth.auth()?.currentUser!.displayName)!, groupId: groupId!)
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = .MediumStyle
+            dateFormatter.timeStyle = .NoStyle
+            dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
+            
+            let currentDate = dateFormatter.stringFromDate(NSDate())
+            
+            let task = Task(name: nameTextField.text! ,body:bodyTextView.text, datePosted: currentDate, userPosted: (FIRAuth.auth()?.currentUser!.displayName)!, groupId: groupId!)
     
-            let taskData : NSDictionary = ["name": task.name, "body" :task.body, "datePosted" : task.datePosted, "userPosted": task.userPosted, "group": task.groupId!]
+            let taskData : NSDictionary = ["name": task.name, "body" :task.body, "datePosted" : task.datePosted, "userPosted": task.userPosted, "group": task.groupId!, "claimed" : task.claimed]
     
             let ref = FIRDatabase.database().reference()
             ref.child("Groups").child(groupId!).child("noUnclaimed").setValue(group!.noUnclaimed)
@@ -55,7 +63,7 @@ class CreateTaskViewController: UIViewController {
             let taskRef = ref.child("Tasks").child(uuid)
             taskRef.setValue(taskData)
             let newTask : NSDictionary = [uuid : "https://eventtask-40794.firebaseio.com/Tasks/\(uuid)"]
-          ref.child("Groups").child(groupId!).child("tasks").updateChildValues((newTask as [NSObject : AnyObject]))
+            ref.child("Groups").child(groupId!).child("tasks").updateChildValues((newTask as [NSObject : AnyObject]))
             
         }
         
@@ -64,16 +72,20 @@ class CreateTaskViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+extension CreateTaskViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+extension CreateTaskViewController: UITextViewDelegate {
+    
+    func textViewShouldReturn(textView: UITextView) -> Bool {
+        textView.resignFirstResponder()
+        return true
+    }
+}
+

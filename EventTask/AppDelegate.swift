@@ -18,11 +18,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
   //  let firebase = Firebase(url: "eventtask-40794.firebaseio.com")
-
+    override init(){
+        super.init()
+        FIRApp.configure()
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        FIRApp.configure()
+     
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+       
+            
+        
         return true
     }
     

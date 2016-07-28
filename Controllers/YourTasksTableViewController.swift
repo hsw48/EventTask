@@ -7,89 +7,108 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
 class YourTasksTableViewController: UITableViewController {
-
+ 
+    var tasks = [String?]()
+    let ref = FIRDatabase.database().reference()
+    
     override func viewDidLoad() {
+      
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    override func viewWillAppear(animated: Bool) {
+        let tasksRef = ref.child("Users").child((FIRAuth.auth()?.currentUser)!.uid).child("tasks")
+        tasksRef.observeEventType(.Value, withBlock: { snapshot in
+            if self.tasks.count < snapshot.children.allObjects.count {
+                self.tasks = []
+                if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                    for snap in snapshots {
+                        self.tasks.append(String(snap.key))
+                    }
+                }
+            }
+            self.tableView.reloadData()
+        })
+        super.viewWillAppear(true)
+    }
+    
+    override func viewDidAppear(animated: Bool){
+        
+        super.viewDidAppear(true)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+   
     }
 
-    // MARK: - Table view data source
-
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        let count = tasks.count
+        return count
     }
-
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCellWithIdentifier("YourTasksCell", forIndexPath: indexPath) as! YourTasksTableViewCell
+       
+        
+        let row = indexPath.row
+        
+        //set labels of task cells
+        let ref = FIRDatabase.database().reference()
+        
+        let doneRef = ref.child("Tasks").child(tasks[row]!).child("done")
+        doneRef.observeEventType(.Value, withBlock: { snapshot in
+            print("snapshotttt \(snapshot.value! as! NSObject)")
+            if snapshot.value! as! NSObject == 0 {
+                cell.backgroundColor = UIColor.redColor()
+            } else if snapshot.value! as! NSObject == 1 {
+                cell.backgroundColor = UIColor.greenColor()
+            }
+            
+        })
+        
+        let nameRef = ref.child("Tasks").child(tasks[row]!).child("name")
+        nameRef.observeEventType(.Value, withBlock: { snapshot in
+           
+            print("task name \(snapshot.value!)")
+            cell.titleLabel.text = String(snapshot.value!)
+        })
+      
+        let groupRef = ref.child("Tasks").child(tasks[row]!).child("group")
+        groupRef.observeEventType(.Value, withBlock: { snapshot in
+            let groupNameRef = ref.child("Groups").child(snapshot.value as! String).child("name")
+            groupNameRef.observeEventType(.Value, withBlock: { snapshot in
+                cell.detailLabel.text = String(snapshot.value!)
+            })
+        })
 
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ViewTask" {
+        let yourTaskViewController = segue.destinationViewController as! YourTaskViewController
+        
+            let indexPath = tableView.indexPathForSelectedRow!
+            let taskId : String = tasks[indexPath.row]!
+            
+            yourTaskViewController.taskId = taskId
+       //     yourTaskViewController.group = self.group!
+        //    yourTaskViewController.unclaimedTasks = self.unclaimedTasks
+        
+            }
+        }
+        
+    @IBAction func unwindSegue(segue: UIStoryboardSegue) {
+        
     }
-    */
 
 }
