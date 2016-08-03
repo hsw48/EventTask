@@ -115,9 +115,10 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func alreadyHaveAccount(sender: AnyObject) {
-        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
-        self.presentViewController(vc, animated: true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
+//        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
+//        self.presentViewController(vc, animated: true, completion: nil)
         
     }
     

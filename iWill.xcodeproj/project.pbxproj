@@ -16,6 +16,7 @@
 		846112031D4FB8950098BB70 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846112021D4FB8950098BB70 /* SignUpViewController.swift */; };
 		846112061D4FBACA0098BB70 /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846112051D4FBACA0098BB70 /* extension.swift */; };
 		846112081D4FC6500098BB70 /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846112071D4FC6500098BB70 /* common.swift */; };
+		8466FC5C1D52A3F8007642A3 /* AddMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466FC5B1D52A3F8007642A3 /* AddMembersViewController.swift */; };
 		84822A6E1D5105DE007912DF /* DisplayMembersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84822A6D1D5105DE007912DF /* DisplayMembersTableViewController.swift */; };
 		84822A701D5109F3007912DF /* MembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84822A6F1D5109F3007912DF /* MembersTableViewCell.swift */; };
 		84822A721D5144BF007912DF /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84822A711D5144BF007912DF /* UI.swift */; };
@@ -52,12 +53,13 @@
 		846112021D4FB8950098BB70 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		846112051D4FBACA0098BB70 /* extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		846112071D4FC6500098BB70 /* common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = common.swift; sourceTree = "<group>"; };
+		8466FC5B1D52A3F8007642A3 /* AddMembersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMembersViewController.swift; sourceTree = "<group>"; };
 		84822A6D1D5105DE007912DF /* DisplayMembersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayMembersTableViewController.swift; sourceTree = "<group>"; };
 		84822A6F1D5109F3007912DF /* MembersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembersTableViewCell.swift; sourceTree = "<group>"; };
 		84822A711D5144BF007912DF /* UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		84DB19101D46C58900578FBC /* ClaimedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimedTableViewCell.swift; sourceTree = "<group>"; };
 		84DB19121D46C59800578FBC /* UnclaimedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnclaimedTableViewCell.swift; sourceTree = "<group>"; };
-		84E74A7F1D36C5B300FD56C2 /* EventTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84E74A7F1D36C5B300FD56C2 /* iWill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E74A821D36C5B300FD56C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84E74A871D36C5B300FD56C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84E74A891D36C5B300FD56C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -115,7 +117,7 @@
 				84E74A981D36EB7F00FD56C2 /* Controllers */,
 				84E74A991D36EB7F00FD56C2 /* Models */,
 				84E74A9A1D36EB7F00FD56C2 /* Views */,
-				84E74A811D36C5B300FD56C2 /* EventTask */,
+				84E74A811D36C5B300FD56C2 /* iWill */,
 				84E74A801D36C5B300FD56C2 /* Products */,
 				CB69688199AEF3ADCA644610 /* Pods */,
 				4B09B8987EA6066528510438 /* Frameworks */,
@@ -125,12 +127,12 @@
 		84E74A801D36C5B300FD56C2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84E74A7F1D36C5B300FD56C2 /* EventTask.app */,
+				84E74A7F1D36C5B300FD56C2 /* iWill.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		84E74A811D36C5B300FD56C2 /* EventTask */ = {
+		84E74A811D36C5B300FD56C2 /* iWill */ = {
 			isa = PBXGroup;
 			children = (
 				84E74A961D36C61400FD56C2 /* Podfile */,
@@ -141,6 +143,7 @@
 				84E74A8E1D36C5B300FD56C2 /* Info.plist */,
 				84E74A941D36C5F500FD56C2 /* GoogleService-Info.plist */,
 			);
+			name = iWill;
 			path = EventTask;
 			sourceTree = "<group>";
 		};
@@ -159,6 +162,7 @@
 				84E74AB11D38472200FD56C2 /* TabBarViewController.swift */,
 				846111FE1D4BF7920098BB70 /* ContactsViewController.swift */,
 				84822A6D1D5105DE007912DF /* DisplayMembersTableViewController.swift */,
+				8466FC5B1D52A3F8007642A3 /* AddMembersViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -198,9 +202,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		84E74A7E1D36C5B300FD56C2 /* EventTask */ = {
+		84E74A7E1D36C5B300FD56C2 /* iWill */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84E74A911D36C5B300FD56C2 /* Build configuration list for PBXNativeTarget "EventTask" */;
+			buildConfigurationList = 84E74A911D36C5B300FD56C2 /* Build configuration list for PBXNativeTarget "iWill" */;
 			buildPhases = (
 				0548516D8AA064793A131E5C /* [CP] Check Pods Manifest.lock */,
 				84E74A7B1D36C5B300FD56C2 /* Sources */,
@@ -213,9 +217,9 @@
 			);
 			dependencies = (
 			);
-			name = EventTask;
+			name = iWill;
 			productName = EventTask;
-			productReference = 84E74A7F1D36C5B300FD56C2 /* EventTask.app */;
+			productReference = 84E74A7F1D36C5B300FD56C2 /* iWill.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -247,7 +251,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84E74A7E1D36C5B300FD56C2 /* EventTask */,
+				84E74A7E1D36C5B300FD56C2 /* iWill */,
 			);
 		};
 /* End PBXProject section */
@@ -324,6 +328,7 @@
 				846111F91D4A9DF90098BB70 /* YourTaskViewController.swift in Sources */,
 				84E74AAA1D3705DC00FD56C2 /* Group.swift in Sources */,
 				84822A701D5109F3007912DF /* MembersTableViewCell.swift in Sources */,
+				8466FC5C1D52A3F8007642A3 /* AddMembersViewController.swift in Sources */,
 				846111FF1D4BF7920098BB70 /* ContactsViewController.swift in Sources */,
 				84E74AB21D38472200FD56C2 /* TabBarViewController.swift in Sources */,
 				84E74A831D36C5B300FD56C2 /* AppDelegate.swift in Sources */,
@@ -463,7 +468,7 @@
 				INFOPLIST_FILE = EventTask/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hsw.EventTask;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iWill;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -478,7 +483,7 @@
 				INFOPLIST_FILE = EventTask/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hsw.EventTask;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = iWill;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -495,7 +500,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84E74A911D36C5B300FD56C2 /* Build configuration list for PBXNativeTarget "EventTask" */ = {
+		84E74A911D36C5B300FD56C2 /* Build configuration list for PBXNativeTarget "iWill" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84E74A921D36C5B300FD56C2 /* Debug */,

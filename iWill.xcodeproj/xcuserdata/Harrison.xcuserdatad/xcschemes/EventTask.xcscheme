@@ -17,7 +17,7 @@
                BlueprintIdentifier = "84E74A7E1D36C5B300FD56C2"
                BuildableName = "EventTask.app"
                BlueprintName = "EventTask"
-               ReferencedContainer = "container:iWill.xcodeproj">
+               ReferencedContainer = "container:iWilll.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "84E74A7E1D36C5B300FD56C2"
             BuildableName = "EventTask.app"
             BlueprintName = "EventTask"
-            ReferencedContainer = "container:iWill.xcodeproj">
+            ReferencedContainer = "container:iWilll.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,7 +58,7 @@
             BlueprintIdentifier = "84E74A7E1D36C5B300FD56C2"
             BuildableName = "EventTask.app"
             BlueprintName = "EventTask"
-            ReferencedContainer = "container:iWill.xcodeproj">
+            ReferencedContainer = "container:iWilll.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -77,7 +77,7 @@
             BlueprintIdentifier = "84E74A7E1D36C5B300FD56C2"
             BuildableName = "EventTask.app"
             BlueprintName = "EventTask"
-            ReferencedContainer = "container:iWill.xcodeproj">
+            ReferencedContainer = "container:iWilll.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

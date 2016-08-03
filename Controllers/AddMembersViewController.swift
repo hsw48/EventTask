@@ -1,27 +1,31 @@
 //
-//  ContactsViewController.swift
-//  EventTask
+//  AddMembersViewController.swift
+//  iWill
 //
-//  Created by Harrison Woodward on 7/29/16.
+//  Created by Julia Woodward on 8/3/16.
 //  Copyright © 2016 Harrison Woodward. All rights reserved.
 //
 
 import UIKit
 import Contacts
+import Firebase
+import FirebaseDatabase
 
-class ContactsViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate  {
+class AddMembersViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+
         
-    @IBOutlet weak var searchbar: UISearchBar!
-
-    @IBOutlet weak var tableView: UITableView!
-    
-    var numbers = [String]()
-    var names = [String]()
-    
+        @IBOutlet weak var searchbar: UISearchBar!
+        
+        @IBOutlet weak var tableView: UITableView!
+        
+//        var numbers = [String]()
+//        var names = [String]()
+        var groupId : String = ""
+        
         private var contacts = [CNContact]()
         private var authStatus: CNAuthorizationStatus = .Denied {
             didSet { // switch enabled search bar, depending contacts permission
-     //           searchBar.userInteractionEnabled = authStatus == .Authorized
+                //           searchBar.userInteractionEnabled = authStatus == .Authorized
                 
                 if authStatus == .Authorized { // all search
                     contacts = fetchContacts("")
@@ -37,7 +41,7 @@ class ContactsViewController: UIViewController, UISearchBarDelegate, UITableView
             
             checkAuthorization()
             
-           // tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kCellID)
+            // tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kCellID)
         }
         
         override func didReceiveMemoryWarning() {
@@ -66,74 +70,20 @@ class ContactsViewController: UIViewController, UISearchBarDelegate, UITableView
             cell.textLabel?.text = fullName
             
             for phoneNumber: CNLabeledValue in contact.phoneNumbers {
-        
+                
                 let number  = phoneNumber.value as! CNPhoneNumber
                 
                 let numberFormatted = (String(number.stringValue.characters.filter({ !["-", "(", ")", " ", "+"].contains($0) })))
                 
                 let lable :String  =  CNLabeledValue.localizedStringForLabel(phoneNumber.label )
                 print("\(lable)  \(numberFormatted)")
-         
+                
             }
             return cell
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "addNumber" {
-            let indexPath = tableView.indexPathForSelectedRow!
-            let contact = contacts[indexPath.row]
-            var numberFormatted : String
-            
-            if contact.phoneNumbers.count > 1 {
-                for phoneNumber: CNLabeledValue in contact.phoneNumbers {
-                    if phoneNumber.label.containsString("Mobile") || phoneNumber.label.containsString("mobile"){
-                        print("more than one")
-                        let fullName = CNContactFormatter.stringFromContact(contact, style: .FullName)
-                        names.append(fullName!)
-                    
-                        let number = phoneNumber.value as! CNPhoneNumber
-            
-                        numberFormatted = (String(number.stringValue.characters.filter({ !["-", "(", ")", " ", "+"].contains($0) })))
-                        if numberFormatted.characters.count > 10 {
-                            let index = numberFormatted.startIndex.advancedBy(0)
-                            numberFormatted.removeAtIndex(index)
-                        }
-                
-                        numbers.append(numberFormatted)
-                    
-                        let vc = segue.destinationViewController as! CreateGroupViewController
-                
-                        vc.names = names
-                        vc.numbers = numbers
-                        print("numbers \(vc.numbers)")
-                    }
-                }
-            }else {
-                print("only one")
-                for phoneNumber: CNLabeledValue in contact.phoneNumbers {
-                        let fullName = CNContactFormatter.stringFromContact(contact, style: .FullName)
-                        names.append(fullName!)
-                        
-                        let number = phoneNumber.value as! CNPhoneNumber
-                        
-                        numberFormatted = (String(number.stringValue.characters.filter({ !["-", "(", ")", " ", "+"].contains($0) })))
-                        if numberFormatted.characters.count > 10 {
-                            let index = numberFormatted.startIndex.advancedBy(0)
-                            numberFormatted.removeAtIndex(index)
-                        }
-                        
-                        numbers.append(numberFormatted)
-                        
-                        let vc = segue.destinationViewController as! CreateGroupViewController
-                        
-                        vc.names = names
-                        vc.numbers = numbers
-                     print("numbers \(vc.numbers)")
-                }
-            }
         }
-    }
-
+        
+    
+        
         
         func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
             let deleteActionHandler = { (action: UITableViewRowAction, index: NSIndexPath) in
@@ -169,8 +119,104 @@ class ContactsViewController: UIViewController, UISearchBarDelegate, UITableView
             }
             
             return [UITableViewRowAction(style: .Destructive, title: "Delete", handler: deleteActionHandler)]
+                }
+            
+            
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addNumber" {
+            let indexPath = tableView.indexPathForSelectedRow!
+            let contact = contacts[indexPath.row]
+            var numberFormatted : String
+            
+            if contact.phoneNumbers.count > 1 {
+                for phoneNumber: CNLabeledValue in contact.phoneNumbers {
+                    if phoneNumber.label.containsString("Mobile") || phoneNumber.label.containsString("mobile"){
+                        print("more than one")
+ 
+                        let number = phoneNumber.value as! CNPhoneNumber
+                        
+                        numberFormatted = (String(number.stringValue.characters.filter({ !["-", "(", ")", " ", "+"].contains($0) })))
+                        if numberFormatted.characters.count > 10 {
+                            let index = numberFormatted.startIndex.advancedBy(0)
+                            numberFormatted.removeAtIndex(index)
+                        }
+                        let ref = FIRDatabase.database().reference()
+                        
+                        // check if phone number is in database: snapshot.value = phone number's userId
+                        ref.child("Phone Numbers").child(numberFormatted).observeEventType(.Value, withBlock: { snapshot in
+                            let newGroup : NSDictionary = [self.groupId : "https://eventtask-40794.firebaseio.com/Groups/\(self.groupId)"]
+                            
+                            if snapshot.value! is String {
+                                print("adding number")
+                                let newUserId = snapshot.value as! String
+                                ref.child("Users").child(newUserId).child("groups").updateChildValues(newGroup as! [NSObject : AnyObject])
+                                
+                                //                            numbers.append(numberFormatted)
+                                //
+                             //   let vc = segue.destinationViewController as! DisplayMembersTableViewController
+                                
+                                //                            vc.names = names
+                                //                            vc.numbers = numbers
+                                //                            print("numbers \(vc.numbers)")
+                            }
+                            
+                        })}}}else {
+                print("only one")
+                for phoneNumber: CNLabeledValue in contact.phoneNumbers {
+                    
+                    let number = phoneNumber.value as! CNPhoneNumber
+                    
+                    numberFormatted = (String(number.stringValue.characters.filter({ !["-", "(", ")", " ", "+"].contains($0) })))
+                    if numberFormatted.characters.count > 10 {
+                        let index = numberFormatted.startIndex.advancedBy(0)
+                        numberFormatted.removeAtIndex(index)
+                    }
+                    let ref = FIRDatabase.database().reference()
+                    
+                    // check if phone number is in database: snapshot.value = phone number's userId
+                    ref.child("Phone Numbers").child(numberFormatted).observeEventType(.Value, withBlock: { snapshot in
+                        let newGroup : NSDictionary = [self.groupId : "https://eventtask-40794.firebaseio.com/Groups/\(self.groupId)"]
+                        
+                        if snapshot.value! is String {
+                            print("adding number")
+                            let newUserId = snapshot.value as! String
+                            ref.child("Users").child(newUserId).child("groups").updateChildValues(newGroup as! [NSObject : AnyObject])
+                            let userName = ref.child("Users").child(newUserId).child("name")
+                            userName.observeEventType(.Value, withBlock: { snapshot in
+                                let newUserName = snapshot.value as! String
+                                var userIds = [String]()
+                                let userIdsRef = ref.child("Groups").child(self.groupId).child("userIds")
+                                userIdsRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                                    let snapshots = snapshot.children.allObjects as! [FIRDataSnapshot]
+                                    for snap in snapshots {
+                                        userIds.append(String(snap.value!))
+                                        print("userIds \(userIds)")
+                                    }
+                                    userIds.append(newUserId)
+                                     print("userIds final \(userIds)")
+                                    userIdsRef.setValue(userIds)
+                                })
+
+                             let userNamesRef = ref.child("Groups").child(self.groupId).child("userNames")
+                             var userNames = [String]()
+                            userNamesRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                                let snapshots = snapshot.children.allObjects as! [FIRDataSnapshot]
+                                for snap in snapshots {
+                                    userNames.append(String(snap.value!))
+                                }
+                                userNames.append(newUserName)
+                                userNamesRef.setValue(userNames)
+                                
+                            })
+                           
+                        })
+                        }})
+                    
+                }
+            }
+        }
     }
-    
+            
         private func checkAuthorization() {
             // get current status
             let status = CNContactStore.authorizationStatusForEntityType(.Contacts)
@@ -183,7 +229,7 @@ class ContactsViewController: UIViewController, UISearchBarDelegate, UITableView
                         print("Permission allowed")
                         self.authStatus = .Authorized
                     } else {
-                       print("Permission denied")
+                        print("Permission denied")
                         self.authStatus = .Denied
                     }
                 }
@@ -202,8 +248,8 @@ class ContactsViewController: UIViewController, UISearchBarDelegate, UITableView
             case .Authorized:
                 print("Authorized")
             }
-    }
-    
+        }
+        
         
         // fetch the contact of matching names
         private func fetchContacts(name: String) -> [CNContact] {
@@ -241,6 +287,7 @@ class ContactsViewController: UIViewController, UISearchBarDelegate, UITableView
                 self.presentViewController(alert, animated: true, completion: nil)
                 })
         }
-}
+    }
+
 
 

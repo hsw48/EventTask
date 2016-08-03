@@ -15,6 +15,9 @@ class DisplayMembersTableViewController: UITableViewController {
     var group : Group?
     var groupId : String?
     var rowCount : Int = 0
+    var names = [String]()
+    var numbers = [String]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +28,15 @@ class DisplayMembersTableViewController: UITableViewController {
             }
             self.tableView.reloadData()
         })
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addMember" {
+            let vc = segue.destinationViewController as! AddMembersViewController
+            vc.groupId = groupId!
+            
+        }
         
     }
 

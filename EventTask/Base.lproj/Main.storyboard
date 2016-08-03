@@ -28,7 +28,7 @@
         <!--SignUpViewController-->
         <scene sceneID="2Ej-VG-qGE">
             <objects>
-                <viewController storyboardIdentifier="SignUpViewController" title="SignUpViewController" id="SPP-L5-VNV" customClass="SignUpViewController" customModule="EventTask" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" title="SignUpViewController" id="SPP-L5-VNV" customClass="SignUpViewController" customModule="iWill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GYv-oN-cHO"/>
                         <viewControllerLayoutGuide type="bottom" id="aFQ-3z-QXo"/>
@@ -52,7 +52,7 @@
                                     <constraint firstAttribute="width" constant="180" id="UVv-TQ-6aX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="verify password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NWn-tS-GwJ">
                                 <rect key="frame" x="97" y="294" width="180" height="30"/>
@@ -60,7 +60,7 @@
                                     <constraint firstAttribute="width" constant="180" id="0i5-MR-7Od"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aZ6-4w-g4F">
                                 <rect key="frame" x="97" y="113" width="180" height="30"/>
@@ -165,7 +165,7 @@
         <!--SignInViewController-->
         <scene sceneID="AiR-DS-mdk">
             <objects>
-                <viewController storyboardIdentifier="SignInViewController" title="SignInViewController" hidesBottomBarWhenPushed="YES" id="XbU-md-hee" customClass="SignInViewController" customModule="EventTask" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewController" title="SignInViewController" hidesBottomBarWhenPushed="YES" id="XbU-md-hee" customClass="SignInViewController" customModule="iWill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oKy-mT-yKu"/>
                         <viewControllerLayoutGuide type="bottom" id="2Jq-fv-ksD"/>
@@ -187,14 +187,6 @@
                                 <rect key="frame" x="97" y="163" width="180" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="dv8-Y3-piD"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ube-jB-hJL">
-                                <rect key="frame" x="97" y="221" width="180" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="180" id="YLV-aJ-sEc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -228,6 +220,14 @@
                                     <action selector="forgetPassword:" destination="XbU-md-hee" eventType="touchUpInside" id="OHZ-Gk-SFJ"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ube-jB-hJL">
+                                <rect key="frame" x="97" y="221" width="180" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="YLV-aJ-sEc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -284,13 +284,13 @@
         <!--GroupsTableViewController-->
         <scene sceneID="eUt-um-7g8">
             <objects>
-                <tableViewController title="GroupsTableViewController" id="r3v-w5-R2x" customClass="GroupsTableViewController" customModule="EventTask" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="GroupsTableViewController" id="r3v-w5-R2x" customClass="GroupsTableViewController" customModule="iWill" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="F4j-JN-oov">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupCell" textLabel="VIH-Of-Thp" detailTextLabel="HHj-Jw-hxd" style="IBUITableViewCellStyleValue1" id="8FV-T0-6CP" customClass="GroupTableViewCell" customModule="EventTask" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupCell" textLabel="VIH-Of-Thp" detailTextLabel="HHj-Jw-hxd" style="IBUITableViewCellStyleValue1" id="8FV-T0-6CP" customClass="GroupTableViewCell" customModule="iWill" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8FV-T0-6CP" id="BXj-eY-XJ0">
@@ -350,7 +350,7 @@
         <!--CreateGroupViewController-->
         <scene sceneID="Nd7-0v-gLt">
             <objects>
-                <viewController title="CreateGroupViewController" hidesBottomBarWhenPushed="YES" id="rEy-rh-esx" customClass="CreateGroupViewController" customModule="EventTask" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="CreateGroupViewController" hidesBottomBarWhenPushed="YES" id="rEy-rh-esx" customClass="CreateGroupViewController" customModule="iWill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Uw9-dj-dMK"/>
                         <viewControllerLayoutGuide type="bottom" id="NU5-Kk-x8S"/>
@@ -397,14 +397,14 @@
                                     <segue destination="qRQ-yE-UPM" kind="show" id="1je-lu-ko9"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n29-hV-5ac">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="hello" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n29-hV-5ac">
                                 <rect key="frame" x="68" y="284" width="240" height="190"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="Xlp-bt-3N5"/>
                                     <constraint firstAttribute="height" constant="190" id="ge0-Ih-pAc"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="add by phone number" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KMp-B3-Hyx">
@@ -428,7 +428,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ms2-Zh-idw">
-                                <rect key="frame" x="0.0" y="568" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Ym1-7D-RH9"/>
                                 </constraints>
@@ -457,6 +457,7 @@
                             <constraint firstItem="NU5-Kk-x8S" firstAttribute="top" secondItem="ms2-Zh-idw" secondAttribute="bottom" id="Y0Z-1F-O6R"/>
                             <constraint firstItem="KMp-B3-Hyx" firstAttribute="top" secondItem="Sl7-dY-xLM" secondAttribute="bottom" constant="8" id="b7s-ml-iBL"/>
                             <constraint firstItem="Mys-yD-uct" firstAttribute="centerX" secondItem="y3b-rD-74k" secondAttribute="centerX" id="bcb-5J-mvM"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="ms2-Zh-idw" secondAttribute="bottom" id="dTP-Ge-0gQ"/>
                             <constraint firstItem="STQ-1F-iK6" firstAttribute="top" secondItem="Sl7-dY-xLM" secondAttribute="bottom" constant="8" id="eKe-da-Axm"/>
                             <constraint firstItem="Mys-yD-uct" firstAttribute="top" secondItem="Uw9-dj-dMK" secondAttribute="bottom" constant="20" id="oPl-ji-NxB"/>
                             <constraint firstItem="KMp-B3-Hyx" firstAttribute="centerX" secondItem="y3b-rD-74k" secondAttribute="centerX" id="r1F-2K-Mlf"/>
@@ -468,6 +469,7 @@
                                 <exclude reference="Xeg-LZ-bo8"/>
                                 <exclude reference="10m-Ny-DdU"/>
                                 <exclude reference="FxD-hz-nmM"/>
+                                <exclude reference="Y0Z-1F-O6R"/>
                             </mask>
                         </variation>
                     </view>
@@ -495,7 +497,7 @@
         <!--ContactsViewController-->
         <scene sceneID="dMt-vi-sOW">
             <objects>
-                <viewController title="ContactsViewController" hidesBottomBarWhenPushed="YES" id="qRQ-yE-UPM" customClass="ContactsViewController" customModule="EventTask" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="ContactsViewController" hidesBottomBarWhenPushed="YES" id="qRQ-yE-UPM" customClass="ContactsViewController" customModule="iWill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nr0-gs-DXE"/>
                         <viewControllerLayoutGuide type="bottom" id="cHP-rg-wVQ"/>
@@ -512,7 +514,7 @@
                                 <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactsCell" textLabel="ttj-IC-2H9" style="IBUITableViewCellStyleDefault" id="Koc-kG-nnL" customClass="ContactsTableViewCell" customModule="EventTask" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactsCell" textLabel="ttj-IC-2H9" style="IBUITableViewCellStyleDefault" id="Koc-kG-nnL" customClass="ContactsTableViewCell" customModule="iWill" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Koc-kG-nnL" id="0Ut-Tj-tuR">
@@ -564,7 +566,7 @@
         <!--Display Group View Controller-->
         <scene sceneID="knZ-BK-imd">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="0oV-WH-iTX" customClass="DisplayGroupViewController" customModule="EventTask" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="0oV-WH-iTX" customClass="DisplayGroupViewController" customModule="iWill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="abo-ZY-AZu"/>
                         <viewControllerLayoutGuide type="bottom" id="VlB-b4-a3W"/>
@@ -574,7 +576,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w06-y4-acF">
-                                <rect key="frame" x="0.0" y="573" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <color key="backgroundColor" white="0.56000000000000005" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="FS3-XT-njx"/>
@@ -597,10 +599,10 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="y48-hI-xc8">
-                                <rect key="frame" x="0.0" y="108" width="375" height="465"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="509"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="claimedCell" textLabel="hib-Xq-DLL" detailTextLabel="gXz-JW-hMf" rowHeight="70" style="IBUITableViewCellStyleValue1" id="tbj-xt-Jh9" customClass="ClaimedTableViewCell" customModule="EventTask" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="claimedCell" textLabel="hib-Xq-DLL" detailTextLabel="gXz-JW-hMf" rowHeight="70" style="IBUITableViewCellStyleValue1" id="tbj-xt-Jh9" customClass="ClaimedTableViewCell" customModule="iWill" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" tableViewCell="tbj-xt-Jh9" id="is3-g3-I1h">
@@ -628,7 +630,7 @@
                                             <outlet property="titleLabel" destination="hib-Xq-DLL" id="SXK-AL-pRf"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="unclaimedCell" id="g7b-1o-MV0" customClass="UnclaimedTableViewCell" customModule="EventTask" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="unclaimedCell" id="g7b-1o-MV0" customClass="UnclaimedTableViewCell" customModule="iWill" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="98" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g7b-1o-MV0" id="zom-jE-m61">
@@ -678,7 +680,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="VlB-b4-a3W" firstAttribute="top" secondItem="w06-y4-acF" secondAttribute="bottom" id="5PQ-vz-GpD"/>
+                            <constraint firstItem="w06-y4-acF" firstAttribute="bottom" secondItem="VlB-b4-a3W" secondAttribute="top" id="5PQ-vz-GpD"/>
                             <constraint firstAttribute="trailing" secondItem="y48-hI-xc8" secondAttribute="trailing" id="5jw-Oa-Zoy"/>
                             <constraint firstItem="Ra9-v0-AZu" firstAttribute="top" secondItem="abo-ZY-AZu" secondAttribute="bottom" constant="8" id="AHd-Uu-vkb"/>
                             <constraint firstItem="y48-hI-xc8" firstAttribute="top" secondItem="Ra9-v0-AZu" secondAttribute="bottom" constant="8" id="Gft-g2-T2u"/>
@@ -686,6 +688,7 @@
                             <constraint firstItem="w06-y4-acF" firstAttribute="centerX" secondItem="5vX-9f-P3K" secondAttribute="centerX" id="Mp2-Ov-qzI"/>
                             <constraint firstItem="w06-y4-acF" firstAttribute="top" secondItem="y48-hI-xc8" secondAttribute="bottom" id="N9T-Vp-Lso"/>
                             <constraint firstItem="y48-hI-xc8" firstAttribute="top" secondItem="abo-ZY-AZu" secondAttribute="bottom" id="WaX-Mw-A9X"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="w06-y4-acF" secondAttribute="bottom" id="YB6-1w-cCM"/>
                             <constraint firstAttribute="trailing" secondItem="w06-y4-acF" secondAttribute="trailing" id="njX-WB-sLA"/>
                             <constraint firstItem="y48-hI-xc8" firstAttribute="leading" secondItem="5vX-9f-P3K" secondAttribute="leading" id="ojQ-0j-J06"/>
                             <constraint firstItem="Ra9-v0-AZu" firstAttribute="centerX" secondItem="5vX-9f-P3K" secondAttribute="centerX" id="uOS-0f-HZl"/>
@@ -693,6 +696,7 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="WaX-Mw-A9X"/>
+                                <exclude reference="5PQ-vz-GpD"/>
                             </mask>
                         </variation>
                     </view>
@@ -718,7 +722,7 @@
         <!--Display Task View Controller-->
         <scene sceneID="OYg-aD-cV1">
             <objects>
-                <viewController id="a42-Hv-a8u" customClass="DisplayTaskViewController" customModule="EventTask" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="a42-Hv-a8u" customClass="DisplayTaskViewController" customModule="iWill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M6o-li-MYT"/>
                         <viewControllerLayoutGuide type="bottom" id="XNO-zD-8fq"/>
@@ -822,7 +826,7 @@
         <!--Create Task View Controller-->
         <scene sceneID="74f-nK-c9O">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="tWS-Na-8NQ" customClass="CreateTaskViewController" customModule="EventTask" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="tWS-Na-8NQ" customClass="CreateTaskViewController" customModule="iWill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="I26-UI-nfN"/>
                         <viewControllerLayoutGuide type="bottom" id="yJS-aP-Qfr"/>
@@ -849,7 +853,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ekc-8E-4aI">
-                                <rect key="frame" x="0.0" y="573" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <color key="backgroundColor" red="0.1256024677" green="0.59581787770000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="hdy-HX-qGR"/>
@@ -890,6 +894,7 @@
                             <constraint firstItem="Khw-Al-A1I" firstAttribute="top" secondItem="j4h-ZD-sUR" secondAttribute="bottom" constant="15" id="Ndn-6i-lGL"/>
                             <constraint firstItem="j4h-ZD-sUR" firstAttribute="top" secondItem="I26-UI-nfN" secondAttribute="bottom" constant="20" id="SNa-OA-i3o"/>
                             <constraint firstItem="j4h-ZD-sUR" firstAttribute="centerX" secondItem="GHe-zO-ulr" secondAttribute="centerX" id="Wc0-5I-gjf"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Ekc-8E-4aI" secondAttribute="bottom" id="XKB-ND-aYv"/>
                             <constraint firstItem="hjL-ar-v8J" firstAttribute="trailing" secondItem="GHe-zO-ulr" secondAttribute="trailingMargin" id="cXp-pn-rX2"/>
                             <constraint firstItem="Ekc-8E-4aI" firstAttribute="leading" secondItem="GHe-zO-ulr" secondAttribute="leading" id="fxj-kM-nod"/>
                             <constraint firstItem="Khw-Al-A1I" firstAttribute="centerX" secondItem="GHe-zO-ulr" secondAttribute="centerX" id="kdJ-Cl-Gbb"/>
@@ -900,6 +905,7 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="ody-m1-EsM"/>
+                                <exclude reference="sdf-0Y-IQ1"/>
                             </mask>
                         </variation>
                     </view>
@@ -925,13 +931,13 @@
         <!--Display Members Table View Controller-->
         <scene sceneID="GXa-4q-Ih6">
             <objects>
-                <tableViewController hidesBottomBarWhenPushed="YES" id="hRJ-Hr-fOo" customClass="DisplayMembersTableViewController" customModule="EventTask" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="hRJ-Hr-fOo" customClass="DisplayMembersTableViewController" customModule="iWill" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="x0J-Pu-YdP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="memberCell" textLabel="sQZ-HU-FI4" style="IBUITableViewCellStyleDefault" id="wAl-B1-K6G" customClass="MembersTableViewCell" customModule="EventTask" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="memberCell" textLabel="sQZ-HU-FI4" style="IBUITableViewCellStyleDefault" id="wAl-B1-K6G" customClass="MembersTableViewCell" customModule="iWill" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wAl-B1-K6G" id="nhb-FM-sCE">
@@ -958,6 +964,13 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="g6E-cb-rUD">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="o45-PN-62N">
+                            <connections>
+                                <segue destination="IBz-Kc-2wA" kind="show" identifier="addMember" id="xHE-fR-2Ca"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d9B-L9-wNE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -968,7 +981,7 @@
         <scene sceneID="nsI-fM-10i">
             <objects>
                 <navigationController id="HR8-jb-3Ac" userLabel="Tasks Nav Controller" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Tasks" id="c7V-3n-QIP"/>
+                    <tabBarItem key="tabBarItem" title="Tasks" image="List" id="c7V-3n-QIP"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="JVa-dA-kxy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -984,13 +997,13 @@
         <!--YourTasksTableViewController-->
         <scene sceneID="bTs-bl-0Pf">
             <objects>
-                <tableViewController title="YourTasksTableViewController" id="Ubl-o7-U6K" customClass="YourTasksTableViewController" customModule="EventTask" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="YourTasksTableViewController" id="Ubl-o7-U6K" customClass="YourTasksTableViewController" customModule="iWill" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="iYO-WD-eHt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="YourTasksCell" textLabel="HFw-r8-u0u" detailTextLabel="Aja-Et-JbC" style="IBUITableViewCellStyleValue1" id="QUP-IN-3BK" customClass="YourTasksTableViewCell" customModule="EventTask" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="YourTasksCell" textLabel="HFw-r8-u0u" detailTextLabel="Aja-Et-JbC" style="IBUITableViewCellStyleValue1" id="QUP-IN-3BK" customClass="YourTasksTableViewCell" customModule="iWill" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QUP-IN-3BK" id="nEf-V2-Ls7">
@@ -1036,7 +1049,7 @@
         <!--Your Task View Controller-->
         <scene sceneID="KZ4-qL-5Ek">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="z00-4h-7sG" customClass="YourTaskViewController" customModule="EventTask" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="z00-4h-7sG" customClass="YourTaskViewController" customModule="iWill" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zca-Fh-GR4"/>
                         <viewControllerLayoutGuide type="bottom" id="5ih-bc-EhN"/>
@@ -1129,8 +1142,78 @@
             </objects>
             <point key="canvasLocation" x="1515.5" y="1208.5"/>
         </scene>
+        <!--AddMembersViewController-->
+        <scene sceneID="rE4-ku-6oD">
+            <objects>
+                <viewController title="AddMembersViewController" hidesBottomBarWhenPushed="YES" id="IBz-Kc-2wA" customClass="AddMembersViewController" customModule="iWill" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s74-uh-6aj"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gif-Qr-Xnb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rag-nF-n09">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Scf-Ph-lKU">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B3r-sv-llv">
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactsCell" textLabel="M9W-CH-SKb" style="IBUITableViewCellStyleDefault" id="sKD-Nf-cN5" customClass="ContactsTableViewCell" customModule="iWill" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sKD-Nf-cN5" id="cQm-JH-884">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M9W-CH-SKb">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="pK6-YE-CYn" kind="unwind" identifier="addNumber" unwindAction="unwindSegue:" id="mvt-lO-sJe"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="IBz-Kc-2wA" id="j8F-jd-qOS"/>
+                                    <outlet property="delegate" destination="IBz-Kc-2wA" id="GId-1e-Xg3"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="B3r-sv-llv" secondAttribute="trailing" id="3Ae-II-KiD"/>
+                            <constraint firstAttribute="bottom" secondItem="B3r-sv-llv" secondAttribute="bottom" id="5FX-8f-3an"/>
+                            <constraint firstItem="B3r-sv-llv" firstAttribute="top" secondItem="Scf-Ph-lKU" secondAttribute="bottom" id="5Jh-Ej-2Rt"/>
+                            <constraint firstItem="Scf-Ph-lKU" firstAttribute="leading" secondItem="Rag-nF-n09" secondAttribute="leading" id="Mao-xD-Jhm"/>
+                            <constraint firstItem="Scf-Ph-lKU" firstAttribute="top" secondItem="s74-uh-6aj" secondAttribute="bottom" id="Sym-OL-NU2"/>
+                            <constraint firstAttribute="trailing" secondItem="Scf-Ph-lKU" secondAttribute="trailing" id="cL0-7d-Ij1"/>
+                            <constraint firstItem="B3r-sv-llv" firstAttribute="leading" secondItem="Rag-nF-n09" secondAttribute="leading" id="hfm-Kg-3r1"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="searchbar" destination="Scf-Ph-lKU" id="Ods-89-TJo"/>
+                        <outlet property="tableView" destination="B3r-sv-llv" id="acl-Vq-4Qx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IY9-Nb-7Fa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="pK6-YE-CYn" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3093.5" y="-280.5"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="List" width="50" height="50"/>
         <image name="people" width="42" height="42"/>
     </resources>
 </document>
