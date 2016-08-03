@@ -2,7 +2,7 @@
 //  UnclaimedTableViewCell.swift
 //  EventTask
 //
-//  Created by Julia Woodward on 7/25/16.
+//  Created by Harrison Woodward on 7/25/16.
 //  Copyright © 2016 Harrison Woodward. All rights reserved.
 //
 
@@ -17,10 +17,13 @@ class UnclaimedTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var claimButton: UIButton!
-
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        claimButton.layer.cornerRadius = 10
+        claimButton.backgroundColor = orangeButtonColor
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

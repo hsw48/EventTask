@@ -19,6 +19,7 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
     var unclaimedTasks = [String?]()
     
 
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBAction func segmentedControlChange(sender: AnyObject) {
@@ -32,7 +33,12 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
         ref.child("Tasks").child(taskId!).child("claimed").setValue(1)
         unclaimedTasks.removeAtIndex(button!.tag)
         group!.noUnclaimed -= 1
-        ref.child("Tasks").child(taskId!).child("userNameClaimed").setValue((FIRAuth.auth()?.currentUser!.displayName)!)
+        ref.child("Groups").child(groupId!).child("noUnclaimed").setValue(group!.noUnclaimed)
+        if (FIRAuth.auth()?.currentUser!.displayName) != nil {
+            ref.child("Tasks").child(taskId!).child("userNameClaimed").setValue((FIRAuth.auth()?.currentUser!.displayName)!)
+        } else {
+             ref.child("Tasks").child(taskId!).child("userNameClaimed").setValue((FIRAuth.auth()?.currentUser!.email)!)
+        }
         ref.child("Tasks").child(taskId!).child("userIdClaimed").setValue((FIRAuth.auth()?.currentUser!.uid)!)
         let newTask : NSDictionary = [taskId! : "https://eventtask-40794.firebaseio.com/Users/\((FIRAuth.auth()?.currentUser!.uid)!)/\(taskId)"]
         ref.child("Users").child((FIRAuth.auth()?.currentUser!.uid)!).child("tasks").updateChildValues((newTask as [NSObject : AnyObject]))
@@ -48,29 +54,30 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
     }
  
     override func viewDidLoad() {
-        
-        segmentedControl.selectedSegmentIndex = 1
-        getData()
         super.viewDidLoad()
+        addButton.backgroundColor = orangeButtonColor
+        addButton.tintColor = fontColor
+        segmentedControl.tintColor = purpleButtonColor
     }
     
     func getData(){
         if self.segmentedControl.selectedSegmentIndex == 0 {
             createClaimedTasksArray()
         } else if segmentedControl.selectedSegmentIndex == 1{
-            print("get Data index 1")
            createUnclaimedTasksArray()
         }
     }
         
     
     func createClaimedTasksArray() {
+        print("creating claimed")
         var claimedTasksLocal = [String?]()
         var allTasks = [FIRDataSnapshot]()
         let ref = FIRDatabase.database().reference()
         let tasksRef = ref.child("Groups").child(groupId!).child("tasks")
         tasksRef.observeEventType(.Value, withBlock: {snapshot in
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                print("callback")
                 for snap in snapshots {
                     allTasks.append(snap)
                 }
@@ -89,12 +96,14 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
     }
         
     func createUnclaimedTasksArray() {
+         print("creating unclaimed")
         var unclaimedTasksLocal = [String?]()
         var allTasks = [FIRDataSnapshot]()
         let ref = FIRDatabase.database().reference()
         let tasksRef = ref.child("Groups").child(groupId!).child("tasks")
         tasksRef.observeEventType(.Value, withBlock: {snapshot in
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                 print("callback")
                 for snap in snapshots {
                     allTasks.append(snap)
                 }
@@ -104,6 +113,7 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
                 if snapshot.value as! NSObject == 0 {
                     unclaimedTasksLocal.append(String(task.key))
                 }
+                print("reload")
                 self.unclaimedTasks = unclaimedTasksLocal
                 self.tableView.reloadData()
             })
@@ -135,7 +145,7 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if segmentedControl.selectedSegmentIndex == 0 {
             //claimed cell label
-         
+            print("tablie view 0")
             let cell = tableView.dequeueReusableCellWithIdentifier("claimedCell", forIndexPath: indexPath) as! ClaimedTableViewCell
             
             let row = indexPath.row
@@ -158,7 +168,7 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
             
         } else {
             //unclaimed cell labels
-           
+           print("tableview 1")
             let cell = tableView.dequeueReusableCellWithIdentifier("unclaimedCell", forIndexPath: indexPath) as! UnclaimedTableViewCell
             
             cell.claimButton.tag = indexPath.row
@@ -167,7 +177,6 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
             let ref = FIRDatabase.database().reference()
             let nameRef = ref.child("Tasks").child(unclaimedTasks[row]!).child("name")
             nameRef.observeEventType(.Value, withBlock: { snapshot in
-                print("cell snapshot \(String(snapshot.value!))")
                 cell.nameLabel.text = String(snapshot.value!)
             })
             return cell
@@ -181,7 +190,6 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
             createTaskVC.groupId = groupId
         }
         if segue.identifier == "displayTask" {
-            print("Displaying a task")
             let indexPath = tableView.indexPathForSelectedRow!
             var taskId : String
             if segmentedControl.selectedSegmentIndex == 0 {
@@ -193,13 +201,21 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
                 displayTaskViewController.taskId = taskId
                 displayTaskViewController.group = self.group!
                 displayTaskViewController.unclaimedTasks = self.unclaimedTasks
+                displayTaskViewController.groupId = self.groupId!
                 
             
+        }
+        if segue.identifier == "displayMembers" {
+            let displayMembersTableViewController = segue.destinationViewController as! DisplayMembersTableViewController
+            displayMembersTableViewController.groupId = self.groupId!
+            displayMembersTableViewController.group = self.group!
         }
     }
         
     override func viewWillAppear(animated: Bool) {
         self.navigationItem.title = group!.name
+        segmentedControl.selectedSegmentIndex = 1
+        getData()
     }
 
     override func didReceiveMemoryWarning() {

@@ -11,6 +11,14 @@
 		846111F51D480D7C0098BB70 /* DisplayTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846111F41D480D7C0098BB70 /* DisplayTaskViewController.swift */; };
 		846111F71D497C930098BB70 /* YourTasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846111F61D497C930098BB70 /* YourTasksTableViewCell.swift */; };
 		846111F91D4A9DF90098BB70 /* YourTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846111F81D4A9DF90098BB70 /* YourTaskViewController.swift */; };
+		846111FF1D4BF7920098BB70 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846111FE1D4BF7920098BB70 /* ContactsViewController.swift */; };
+		846112011D4BFA110098BB70 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846112001D4BFA110098BB70 /* ContactsTableViewCell.swift */; };
+		846112031D4FB8950098BB70 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846112021D4FB8950098BB70 /* SignUpViewController.swift */; };
+		846112061D4FBACA0098BB70 /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846112051D4FBACA0098BB70 /* extension.swift */; };
+		846112081D4FC6500098BB70 /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846112071D4FC6500098BB70 /* common.swift */; };
+		84822A6E1D5105DE007912DF /* DisplayMembersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84822A6D1D5105DE007912DF /* DisplayMembersTableViewController.swift */; };
+		84822A701D5109F3007912DF /* MembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84822A6F1D5109F3007912DF /* MembersTableViewCell.swift */; };
+		84822A721D5144BF007912DF /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84822A711D5144BF007912DF /* UI.swift */; };
 		84DB19111D46C58900578FBC /* ClaimedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DB19101D46C58900578FBC /* ClaimedTableViewCell.swift */; };
 		84DB19131D46C59900578FBC /* UnclaimedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DB19121D46C59800578FBC /* UnclaimedTableViewCell.swift */; };
 		84E74A831D36C5B300FD56C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E74A821D36C5B300FD56C2 /* AppDelegate.swift */; };
@@ -39,6 +47,14 @@
 		846111F41D480D7C0098BB70 /* DisplayTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayTaskViewController.swift; sourceTree = "<group>"; };
 		846111F61D497C930098BB70 /* YourTasksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourTasksTableViewCell.swift; sourceTree = "<group>"; };
 		846111F81D4A9DF90098BB70 /* YourTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourTaskViewController.swift; sourceTree = "<group>"; };
+		846111FE1D4BF7920098BB70 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		846112001D4BFA110098BB70 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
+		846112021D4FB8950098BB70 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		846112051D4FBACA0098BB70 /* extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
+		846112071D4FC6500098BB70 /* common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = common.swift; sourceTree = "<group>"; };
+		84822A6D1D5105DE007912DF /* DisplayMembersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayMembersTableViewController.swift; sourceTree = "<group>"; };
+		84822A6F1D5109F3007912DF /* MembersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembersTableViewCell.swift; sourceTree = "<group>"; };
+		84822A711D5144BF007912DF /* UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		84DB19101D46C58900578FBC /* ClaimedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimedTableViewCell.swift; sourceTree = "<group>"; };
 		84DB19121D46C59800578FBC /* UnclaimedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnclaimedTableViewCell.swift; sourceTree = "<group>"; };
 		84E74A7F1D36C5B300FD56C2 /* EventTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,9 +98,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		846112041D4FBABD0098BB70 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				846112051D4FBACA0098BB70 /* extension.swift */,
+				846112071D4FC6500098BB70 /* common.swift */,
+				84822A711D5144BF007912DF /* UI.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		84E74A761D36C5B300FD56C2 = {
 			isa = PBXGroup;
 			children = (
+				846112041D4FBABD0098BB70 /* Extension */,
 				84E74A981D36EB7F00FD56C2 /* Controllers */,
 				84E74A991D36EB7F00FD56C2 /* Models */,
 				84E74A9A1D36EB7F00FD56C2 /* Views */,
@@ -128,7 +155,10 @@
 				846111F81D4A9DF90098BB70 /* YourTaskViewController.swift */,
 				84E74AA51D36ECAC00FD56C2 /* CreateTaskViewController.swift */,
 				84E74AAF1D38129200FD56C2 /* SignInViewController.swift */,
+				846112021D4FB8950098BB70 /* SignUpViewController.swift */,
 				84E74AB11D38472200FD56C2 /* TabBarViewController.swift */,
+				846111FE1D4BF7920098BB70 /* ContactsViewController.swift */,
+				84822A6D1D5105DE007912DF /* DisplayMembersTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -150,6 +180,8 @@
 				84DB19101D46C58900578FBC /* ClaimedTableViewCell.swift */,
 				84DB19121D46C59800578FBC /* UnclaimedTableViewCell.swift */,
 				846111F61D497C930098BB70 /* YourTasksTableViewCell.swift */,
+				846112001D4BFA110098BB70 /* ContactsTableViewCell.swift */,
+				84822A6F1D5109F3007912DF /* MembersTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -202,7 +234,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 84E74A7A1D36C5B300FD56C2 /* Build configuration list for PBXProject "EventTask" */;
+			buildConfigurationList = 84E74A7A1D36C5B300FD56C2 /* Build configuration list for PBXProject "iWill" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -291,16 +323,24 @@
 				846111F51D480D7C0098BB70 /* DisplayTaskViewController.swift in Sources */,
 				846111F91D4A9DF90098BB70 /* YourTaskViewController.swift in Sources */,
 				84E74AAA1D3705DC00FD56C2 /* Group.swift in Sources */,
+				84822A701D5109F3007912DF /* MembersTableViewCell.swift in Sources */,
+				846111FF1D4BF7920098BB70 /* ContactsViewController.swift in Sources */,
 				84E74AB21D38472200FD56C2 /* TabBarViewController.swift in Sources */,
 				84E74A831D36C5B300FD56C2 /* AppDelegate.swift in Sources */,
 				84E74AAC1D37073400FD56C2 /* Task.swift in Sources */,
+				846112061D4FBACA0098BB70 /* extension.swift in Sources */,
 				84E74AA41D36ECA200FD56C2 /* CreateGroupViewController.swift in Sources */,
 				845B09051D403BB100158133 /* DisplayGroupViewController.swift in Sources */,
 				84E74AA81D36FBF800FD56C2 /* GroupTableViewCell.swift in Sources */,
+				846112081D4FC6500098BB70 /* common.swift in Sources */,
 				84E74AA21D36EC8400FD56C2 /* YourTasksTableViewController.swift in Sources */,
+				846112011D4BFA110098BB70 /* ContactsTableViewCell.swift in Sources */,
 				84E74AB01D38129200FD56C2 /* SignInViewController.swift in Sources */,
 				84E74A9C1D36EC1600FD56C2 /* GroupsTableViewController.swift in Sources */,
+				846112031D4FB8950098BB70 /* SignUpViewController.swift in Sources */,
+				84822A721D5144BF007912DF /* UI.swift in Sources */,
 				84DB19111D46C58900578FBC /* ClaimedTableViewCell.swift in Sources */,
+				84822A6E1D5105DE007912DF /* DisplayMembersTableViewController.swift in Sources */,
 				84E74AA61D36ECAC00FD56C2 /* CreateTaskViewController.swift in Sources */,
 				84DB19131D46C59900578FBC /* UnclaimedTableViewCell.swift in Sources */,
 				84E74AAE1D37097100FD56C2 /* User.swift in Sources */,
@@ -446,7 +486,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		84E74A7A1D36C5B300FD56C2 /* Build configuration list for PBXProject "EventTask" */ = {
+		84E74A7A1D36C5B300FD56C2 /* Build configuration list for PBXProject "iWill" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84E74A8F1D36C5B300FD56C2 /* Debug */,

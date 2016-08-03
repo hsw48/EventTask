@@ -2,7 +2,7 @@
 //  DisplayTaskViewController.swift
 //  EventTask
 //
-//  Created by Julia Woodward on 7/26/16.
+//  Created by Harrison Woodward on 7/26/16.
 //  Copyright © 2016 Harrison Woodward. All rights reserved.
 //
 
@@ -15,6 +15,7 @@ class DisplayTaskViewController: UIViewController {
     
     var taskId : String?
     var group : Group?
+    var groupId : String?
     var unclaimedTasks = [String?]()
     
     var taskRef : FIRDatabaseReference! = nil
@@ -31,7 +32,12 @@ class DisplayTaskViewController: UIViewController {
         ref.child("Tasks").child(taskId!).child("claimed").setValue(1)
         unclaimedTasks.removeAtIndex(button!.tag)
         group!.noUnclaimed -= 1
-        ref.child("Tasks").child(taskId!).child("userNameClaimed").setValue((FIRAuth.auth()?.currentUser!.displayName)!)
+        ref.child("Groups").child(groupId!).child("noUnclaimed").setValue(group!.noUnclaimed)
+        if (FIRAuth.auth()?.currentUser!.displayName) != nil {
+            ref.child("Tasks").child(taskId!).child("userNameClaimed").setValue((FIRAuth.auth()?.currentUser!.displayName)!)
+        } else {
+            ref.child("Tasks").child(taskId!).child("userNameClaimed").setValue((FIRAuth.auth()?.currentUser!.email)!)
+        }
         ref.child("Tasks").child(taskId!).child("userIdClaimed").setValue((FIRAuth.auth()?.currentUser!.uid)!)
         let newTask : NSDictionary = [taskId! : "https://eventtask-40794.firebaseio.com/Users/\((FIRAuth.auth()?.currentUser!.uid)!)/\(taskId)"]
         ref.child("Users").child((FIRAuth.auth()?.currentUser!.uid)!).child("tasks").updateChildValues((newTask as [NSObject : AnyObject]))
@@ -47,6 +53,11 @@ class DisplayTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        claimButton.backgroundColor = orangeButtonColor
+        claimButton.layer.cornerRadius = 10
+        view.backgroundColor = backgroundColor
+        bodyTextView.layer.cornerRadius = 10
+        
         taskRef = FIRDatabase.database().reference().child("Tasks").child(taskId!)
         
         var datePosted : String = "unknown date"

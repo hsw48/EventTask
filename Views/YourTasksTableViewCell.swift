@@ -2,7 +2,7 @@
 //  YourTasksTableViewCell.swift
 //  EventTask
 //
-//  Created by Julia Woodward on 7/27/16.
+//  Created by Harrison Woodward on 7/27/16.
 //  Copyright © 2016 Harrison Woodward. All rights reserved.
 //
 

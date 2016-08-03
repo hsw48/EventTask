@@ -15,6 +15,8 @@ class YourTaskViewController: UIViewController {
     
     var taskId : String?
 
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var nevermindButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet weak var bodyTextView: UITextView!
@@ -24,13 +26,35 @@ class YourTaskViewController: UIViewController {
     }
     
     @IBAction func nevermindButtonAction(sender: AnyObject) {
-     FIRDatabase.database().reference().child("Tasks").child(taskId!).child("claimed").setValue(0)
-     FIRDatabase.database().reference().child("Users").child((FIRAuth.auth()?.currentUser!.uid)!).child("tasks").child(taskId!).removeValue()
+        let ref = FIRDatabase.database().reference()
+        ref.child("Tasks").child(taskId!).child("claimed").setValue(0)
+        
+        let groupRef = ref.child("Tasks").child(taskId!).child("group")
+        groupRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+            let groupId = String(snapshot.value!)
+            let noUnclaimedRef = ref.child("Groups").child(groupId).child("noUnclaimed")
+            noUnclaimedRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                print("int \(Int(snapshot.value as! NSNumber))")
+                let noUnclaimed = Int(snapshot.value as! NSNumber)
+                noUnclaimedRef.setValue(noUnclaimed + 1)
+            })
+        })
+        
+        ref.child("Users").child((FIRAuth.auth()?.currentUser!.uid)!).child("tasks").child(taskId!).removeValue()
+        ref.child("Tasks").child(taskId!).child("done").setValue(0)
+        ref.child("Tasks").child(taskId!).child("userNameClaimed").setValue(nil)
+        ref.child("Tasks").child(taskId!).child("userIdClaimed").setValue(nil)
+        ref.child("Tasks").child(taskId!).child("dateClaimed").setValue(nil)
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        doneButton.backgroundColor = orangeButtonColor
+        doneButton.layer.cornerRadius = 10
+        nevermindButton.backgroundColor = backgroundColor
+        nevermindButton.layer.cornerRadius = 10
+        view.backgroundColor = backgroundColor
         let ref = FIRDatabase.database().reference()
         let nameRef = ref.child("Tasks").child(taskId!).child("name")
         nameRef.observeEventType(.Value, withBlock:  { snapshot in

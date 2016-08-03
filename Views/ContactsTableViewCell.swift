@@ -1,18 +1,16 @@
 //
-//  ClaimedTableViewCell.swift
+//  ContactsTableViewCell.swift
 //  EventTask
 //
-//  Created by Harrison Woodward on 7/25/16.
+//  Created by Harrison Woodward on 7/29/16.
 //  Copyright © 2016 Harrison Woodward. All rights reserved.
 //
 
 import UIKit
 
-class ClaimedTableViewCell: UITableViewCell {
+class ContactsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var detailLabel: UILabel!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

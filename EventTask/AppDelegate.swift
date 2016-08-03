@@ -11,27 +11,75 @@ import Firebase
 import FirebaseAuth
 import FBSDKCoreKit
 import FBSDKLoginKit
+import AddressBook
+import Contacts
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-  //  let firebase = Firebase(url: "eventtask-40794.firebaseio.com")
+ 
     override init(){
         super.init()
         FIRApp.configure()
+        applyTheme()
     }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
      
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+
+//       //  make sure user hadn't previously denied access
+//        
+//        let status = CNContactStore.authorizationStatusForEntityType(.Contacts)
+//        if status == .Denied || status == .Restricted {
+//            // user previously denied, so tell them to fix that in settings
+//            print("denied or restricted")
+//            return true
+//        }
+//        
+//        // open it
+//        
+//        let store = CNContactStore()
+//        store.requestAccessForEntityType(.Contacts) { granted, error in
+//            guard granted else {
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    // user didn't grant authorization, so tell them to fix that in settings
+//                    print(error)
+//                }
+//                return
+//            }
+//            
+//            // get the contacts
+//            
+//            var contacts = [CNContact]()
+//            let request = CNContactFetchRequest(keysToFetch: [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName), CNContactPhoneNumbersKey])
+//            do {
+//                try store.enumerateContactsWithFetchRequest(request) { contact, stop in
+//                    contacts.append(contact)
+//                }
+//            } catch {
+//                print(error)
+//            }
+//           
+//            // do something with the contacts array (e.g. print the names)
+//            
+//            let formatter = CNContactFormatter()
+//            formatter.style = .FullName
+//            for contact in contacts {
+//                print(formatter.stringFromContact(contact))
+//            }
+
+            
+     //   }
         
        
             
         
         return true
     }
+
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)

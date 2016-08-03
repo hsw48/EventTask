@@ -15,34 +15,45 @@ import FBSDKLoginKit
 
 
 class GroupsTableViewController: UITableViewController {
-    var groupKeys = [String]()
-    var groupUrl = [String]()
+    var groupKeys = [String?]()
+    var groupUrl = [String?]()
     var groups = [Group]()
     var ref : FIRDatabaseReference?
     var groupNames = [String]()
 
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
+    
     @IBAction func logoutButtonPressed(sender: AnyObject) {
-      
-    }
+        let defaults = NSUserDefaults(suiteName: "session")
+        if let _ = defaults?.objectForKey("auth") {
+            defaults?.setObject(.None, forKey: "auth")
+        }
+        showSignInViewController()
 
-  
+    }
 
     override func viewDidLoad(){
     // ref = FIRDatabase.database().reference()
-        
         self.tableView.reloadData()
-        
         super.viewDidLoad()
-       
+    //    self.groupNames = []
+    
     }
     
     override func viewWillAppear(animated: Bool) {
+       
+        if checkForUserSession() == .None {
+            print("called")
+            showSignInViewController()
+            return
+        }
+        print("view will appear")
         ref = FIRDatabase.database().reference()
-        
         let CURRENT_USER_GROUPS_REF = ref!.child("Users").child((FIRAuth.auth()?.currentUser!.uid)!).child("groups")
         CURRENT_USER_GROUPS_REF.observeEventType(.Value, withBlock: { snapshot in
-            //create array of user's groups
-            if self.groupKeys.count < snapshot.children.allObjects.count {
+            
+                //create array of user's groups
+                print("callback")
                 if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                     var tempItems = [FIRDataSnapshot]()
                     self.groupKeys = []
@@ -58,15 +69,18 @@ class GroupsTableViewController: UITableViewController {
                     for item in tempItems {
                         self.groupUrl.append(String(item.value))
                     }
-                    
+                    self.groupNames = []
                     self.tableView.reloadData()
                 }
-            }
-        })
+            })
+        
     }
     
     override func viewDidAppear(animated: Bool){
         super.viewDidAppear(true)
+      //  self.groupNames = []
+      //  self.tableView.reloadData()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -87,31 +101,23 @@ class GroupsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("GroupCell", forIndexPath: indexPath) as! GroupTableViewCell
         let row = indexPath.row
-        
-        // populate groups array with all of users groups
-        // groups.append(  )
-        
+        print("tableView")
         //set labels of group cells
         let ref = FIRDatabase.database().reference()
-        let nameRef = ref.child("Groups").child(groupKeys[row]).child("name")
+        let nameRef = ref.child("Groups").child(groupKeys[row]!).child("name")
         nameRef.observeEventType(.Value, withBlock: { snapshot in
             self.groupNames.append(String(snapshot.value!))
             cell.groupNameLabel.text = String(snapshot.value!)
         })
-        let unclaimedRef = ref.child("Groups").child(groupKeys[row]).child("noUnclaimed")
+        let unclaimedRef = ref.child("Groups").child(groupKeys[row]!).child("noUnclaimed")
         unclaimedRef.observeEventType(.Value, withBlock: { snapshot in
-            cell.noUnclaimedLabel.text = "Unclaimed Tasks: \(String(snapshot.value!))"
-        })
-        let membersRef = ref.child("Groups").child(groupKeys[row]).child("noOfMembers")
-        membersRef.observeEventType(.Value, withBlock: { snapshot in
-            cell.noOfMembersLabel.text = "Members: \(String(snapshot.value!))"
+            cell.noUnclaimedLabel.text = "\(String(snapshot.value!)) Unclaimed Tasks"
         })
         
         return cell
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
        
         
             if segue.identifier == "displayGroup" {
@@ -122,14 +128,10 @@ class GroupsTableViewController: UITableViewController {
                 
                 let ref = FIRDatabase.database().reference()
             
-                let groupRef = ref.child("Groups").child(groupId)
-                
+                let groupRef = ref.child("Groups").child(groupId!)
+                print("groupNames \(self.groupNames)")
                 let newGroup = Group(name: self.groupNames[indexPath.row])
-                
-//                groupRef.child("name").observeEventType(.Value, withBlock: { snapshot in
-//                    newGroup.name = String(snapshot.value!)
-//                  //  print("snapshot \(snapshot.value!)")
-//                })
+                               
                 groupRef.child("noClaimed").observeEventType(.Value, withBlock: { snapshot in
                     newGroup.noClaimed = (snapshot.value as! Int)
                    // print("snapshot2 \(snapshot.value as! Int)")
@@ -158,6 +160,10 @@ class GroupsTableViewController: UITableViewController {
          else if segue.identifier == "addGroup" {
                 segue.destinationViewController as! CreateGroupViewController
             }
+            else if segue.identifier == "logout" {
+               let vc = segue.destinationViewController as! SignInViewController
+                vc.logoutIndex = 1
+        }
     }
     
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -167,5 +173,21 @@ class GroupsTableViewController: UITableViewController {
     @IBAction func unwindSegue(segue: UIStoryboardSegue) {
         
     }
+    func checkForUserSession() -> String? {
+        let userDefaults = NSUserDefaults(suiteName: "session")
+        if let auth =  userDefaults?.stringForKey("auth") {
+            return auth
+        }
+        
+        return .None
+    }
+    
+    func showSignInViewController() {
+        print("show signin")
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc : UIViewController = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
     
 }
+

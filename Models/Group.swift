@@ -18,7 +18,7 @@ class Group {
     var noUnclaimed : Int
     var userNames : [String] = []
     var userIds : [String] = []
-    var tasks : [String] = []
+    var tasks : [NSDictionary] = []
     
     init(name: String) {
         self.name = name

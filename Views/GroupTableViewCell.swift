@@ -11,11 +11,8 @@ import UIKit
 class GroupTableViewCell: UITableViewCell {
 
     @IBOutlet weak var groupNameLabel: UILabel!
-    
-    @IBOutlet weak var noOfMembersLabel: UILabel!
-    
+
     @IBOutlet weak var noUnclaimedLabel: UILabel!
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()

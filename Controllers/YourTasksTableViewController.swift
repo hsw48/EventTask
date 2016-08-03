@@ -17,7 +17,7 @@ class YourTasksTableViewController: UITableViewController {
     let ref = FIRDatabase.database().reference()
     
     override func viewDidLoad() {
-      
+        self.tableView.reloadData()
         super.viewDidLoad()
     }
     override func viewWillAppear(animated: Bool) {
@@ -68,9 +68,9 @@ class YourTasksTableViewController: UITableViewController {
         doneRef.observeEventType(.Value, withBlock: { snapshot in
             print("snapshotttt \(snapshot.value! as! NSObject)")
             if snapshot.value! as! NSObject == 0 {
-                cell.backgroundColor = UIColor.redColor()
+                cell.backgroundColor = UIColor(red:1,green:0.8,blue:0.82,alpha:1)
             } else if snapshot.value! as! NSObject == 1 {
-                cell.backgroundColor = UIColor.greenColor()
+                cell.backgroundColor = UIColor(red:0.78,green:0.90,blue:0.79,alpha:1)
             }
             
         })

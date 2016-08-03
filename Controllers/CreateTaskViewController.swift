@@ -16,14 +16,16 @@ class CreateTaskViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var bodyTextView: UITextView!
     
+    @IBOutlet weak var doneButton: UIButton!
     var group : Group?
     var groupId : String?
    
     override func viewDidLoad() {
-       nameTextField.delegate = self
-        bodyTextView.delegate = self
-        
+        addTapGesture()
         super.viewDidLoad()
+        view.backgroundColor = backgroundColor
+        doneButton.backgroundColor = orangeButtonColor
+        doneButton.tintColor = fontColor
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -37,25 +39,20 @@ class CreateTaskViewController: UIViewController {
             
         } else if segue.identifier == "saveTask" {
             let displayGroupViewController = segue.destinationViewController as! DisplayGroupViewController
-
-            
-       //   let date = NSDate().currentDate()
-            
             displayGroupViewController.group = group
             displayGroupViewController.groupId = groupId
             
             group!.noUnclaimed += 1
             
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = .MediumStyle
-            dateFormatter.timeStyle = .NoStyle
-            dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
-            
-            let currentDate = dateFormatter.stringFromDate(NSDate())
-            
-            let task = Task(name: nameTextField.text! ,body:bodyTextView.text, datePosted: currentDate, userPosted: (FIRAuth.auth()?.currentUser!.displayName)!, groupId: groupId!)
+            var task = Task(name: "temp", body: "temp", datePosted: "temp", userPosted: "temp", groupId: "temp")
+            if (FIRAuth.auth()?.currentUser!.displayName) != nil {
+                task = Task(name: nameTextField.text! ,body:bodyTextView.text, datePosted: currentDate(), userPosted: (FIRAuth.auth()?.currentUser!.displayName)!, groupId: groupId!)
+            } else {
+                task = Task(name: nameTextField.text! ,body:bodyTextView.text, datePosted: currentDate(), userPosted: (FIRAuth.auth()?.currentUser!.email)!, groupId: groupId!)
+            }
+           task.claimed = 0
     
-            let taskData : NSDictionary = ["name": task.name, "body" :task.body, "datePosted" : task.datePosted, "userPosted": task.userPosted, "group": task.groupId!, "claimed" : task.claimed]
+            let taskData : NSDictionary = ["name" : task.name, "body" : task.body, "datePosted" : task.datePosted, "userPosted" : task.userPosted, "group" : task.groupId!, "claimed" : task.claimed]
     
             let ref = FIRDatabase.database().reference()
             ref.child("Groups").child(groupId!).child("noUnclaimed").setValue(group!.noUnclaimed)
@@ -72,20 +69,15 @@ class CreateTaskViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func addTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action:
+            #selector(CreateTaskViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
-extension CreateTaskViewController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-}
-extension CreateTaskViewController: UITextViewDelegate {
-    
-    func textViewShouldReturn(textView: UITextView) -> Bool {
-        textView.resignFirstResponder()
-        return true
-    }
-}
 
