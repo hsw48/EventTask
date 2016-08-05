@@ -2,7 +2,7 @@
 //  AddMembersViewController.swift
 //  iWill
 //
-//  Created by Julia Woodward on 8/3/16.
+//  Created by Harrison Woodward on 8/3/16.
 //  Copyright © 2016 Harrison Woodward. All rights reserved.
 //
 
@@ -13,13 +13,10 @@ import FirebaseDatabase
 
 class AddMembersViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
 
-        
-        @IBOutlet weak var searchbar: UISearchBar!
-        
         @IBOutlet weak var tableView: UITableView!
-        
-//        var numbers = [String]()
-//        var names = [String]()
+    
+        let searchController = UISearchController(searchResultsController: nil)
+        var filteredContacts = [CNContact]()
         var groupId : String = ""
         
         private var contacts = [CNContact]()
@@ -41,8 +38,21 @@ class AddMembersViewController: UIViewController, UISearchBarDelegate, UITableVi
             
             checkAuthorization()
             
-            // tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kCellID)
+            searchController.searchResultsUpdater = self
+            searchController.dimsBackgroundDuringPresentation = false
+            definesPresentationContext = true
+            tableView.tableHeaderView = searchController.searchBar
+            self.tableView.contentInset = UIEdgeInsetsMake(25, 0, 0, 0)
+       
         }
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredContacts = contacts.filter { contact in
+            let fullName = CNContactFormatter.stringFromContact(contact, style: .FullName) ?? "NO NAME"
+            return fullName.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        tableView.reloadData()
+    }
         
         override func didReceiveMemoryWarning() {
             super.didReceiveMemoryWarning()
@@ -63,7 +73,14 @@ class AddMembersViewController: UIViewController, UISearchBarDelegate, UITableVi
         
         func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCellWithIdentifier(kCellID, forIndexPath: indexPath)
-            let contact = contacts[indexPath.row]
+            let contact : CNContact
+            
+            if searchController.active && searchController.searchBar.text != "" {
+                self.tableView.contentInset = UIEdgeInsetsMake(25, 0, 0, 0)
+                contact = filteredContacts[indexPath.row]
+            } else {
+                contact = contacts[indexPath.row]
+            }
             
             // get the full name
             let fullName = CNContactFormatter.stringFromContact(contact, style: .FullName) ?? "NO NAME"
@@ -125,7 +142,15 @@ class AddMembersViewController: UIViewController, UISearchBarDelegate, UITableVi
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addNumber" {
             let indexPath = tableView.indexPathForSelectedRow!
-            let contact = contacts[indexPath.row]
+        
+            let contact : CNContact
+            if searchController.active && searchController.searchBar.text != "" {
+                contact = filteredContacts[indexPath.row]
+            } else {
+                contact = contacts[indexPath.row]
+            }
+            
+            
             var numberFormatted : String
             
             if contact.phoneNumbers.count > 1 {
@@ -151,16 +176,12 @@ class AddMembersViewController: UIViewController, UISearchBarDelegate, UITableVi
                                 let newUserId = snapshot.value as! String
                                 ref.child("Users").child(newUserId).child("groups").updateChildValues(newGroup as! [NSObject : AnyObject])
                                 
-                                //                            numbers.append(numberFormatted)
-                                //
-                             //   let vc = segue.destinationViewController as! DisplayMembersTableViewController
-                                
-                                //                            vc.names = names
-                                //                            vc.numbers = numbers
-                                //                            print("numbers \(vc.numbers)")
+                              
                             }
                             
-                        })}}}else {
+                        })
+                     searchController.searchBar.text = ""
+                    }}}else {
                 print("only one")
                 for phoneNumber: CNLabeledValue in contact.phoneNumbers {
                     
@@ -288,6 +309,12 @@ class AddMembersViewController: UIViewController, UISearchBarDelegate, UITableVi
                 })
         }
     }
+
+extension AddMembersViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+}
 
 
 

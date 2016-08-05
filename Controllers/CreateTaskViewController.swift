@@ -16,7 +16,7 @@ class CreateTaskViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var bodyTextView: UITextView!
     
-    @IBOutlet weak var doneButton: UIButton!
+
     var group : Group?
     var groupId : String?
    
@@ -24,8 +24,8 @@ class CreateTaskViewController: UIViewController {
         addTapGesture()
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
-        doneButton.backgroundColor = orangeButtonColor
-        doneButton.tintColor = fontColor
+        bodyTextView.layer.cornerRadius = 10
+     
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

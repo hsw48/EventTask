@@ -16,6 +16,8 @@ import FBSDKLoginKit
 class SignInViewController: UIViewController /* FBSDKLoginButtonDelegate */ {
 
     @IBOutlet weak var loginButton: UIButton!
+
+    @IBOutlet weak var statementLabel: UILabel!
     
  //   @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
     
@@ -32,6 +34,7 @@ class SignInViewController: UIViewController /* FBSDKLoginButtonDelegate */ {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = backgroundColor
+        statementLabel.backgroundColor = backgroundColor
         addTapGesture()
         signIn.tintColor = fontColor
         createAccount.tintColor = fontColor

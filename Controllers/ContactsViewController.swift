@@ -10,18 +10,19 @@ import UIKit
 import Contacts
 
 class ContactsViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate  {
-        
-    @IBOutlet weak var searchbar: UISearchBar!
-
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     var numbers = [String]()
     var names = [String]()
+    var filteredContacts = [CNContact]()
     
         private var contacts = [CNContact]()
         private var authStatus: CNAuthorizationStatus = .Denied {
             didSet { // switch enabled search bar, depending contacts permission
-     //           searchBar.userInteractionEnabled = authStatus == .Authorized
+              //  searchBar.userInteractionEnabled = authStatus == .Authorized
                 
                 if authStatus == .Authorized { // all search
                     contacts = fetchContacts("")
@@ -34,33 +35,57 @@ class ContactsViewController: UIViewController, UISearchBarDelegate, UITableView
         
         override func viewDidLoad() {
             super.viewDidLoad()
-            
             checkAuthorization()
-            
-           // tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kCellID)
+           
+            searchController.searchResultsUpdater = self
+            searchController.dimsBackgroundDuringPresentation = false
+            definesPresentationContext = true
+            tableView.tableHeaderView = searchController.searchBar
+            self.tableView.contentInset = UIEdgeInsetsMake(25, 0, 0, 0)
         }
+    
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredContacts = contacts.filter { contact in
+            let fullName = CNContactFormatter.stringFromContact(contact, style: .FullName) ?? "NO NAME"
+            return fullName.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        tableView.reloadData()
+    }
         
         override func didReceiveMemoryWarning() {
             super.didReceiveMemoryWarning()
         }
         
-        func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-            contacts = fetchContacts(searchText)
-            tableView.reloadData()
-        }
-        
+//        func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+//            print("func")
+//            contacts = fetchContacts(searchText)
+//            tableView.reloadData()
+//        }
+    
         func numberOfSectionsInTableView(tableView: UITableView) -> Int {
             return 1
         }
         
         func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            if searchController.active && searchController.searchBar.text != "" {
+                return filteredContacts.count
+            }
             return contacts.count
         }
         
         func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCellWithIdentifier(kCellID, forIndexPath: indexPath)
-            let contact = contacts[indexPath.row]
+            let contact : CNContact
             
+            if searchController.active && searchController.searchBar.text != "" {
+                 self.tableView.contentInset = UIEdgeInsetsMake(25, 0, 0, 0)
+                contact = filteredContacts[indexPath.row]
+            } else {
+                contact = contacts[indexPath.row]
+            }
+        
             // get the full name
             let fullName = CNContactFormatter.stringFromContact(contact, style: .FullName) ?? "NO NAME"
             cell.textLabel?.text = fullName
@@ -81,7 +106,14 @@ class ContactsViewController: UIViewController, UISearchBarDelegate, UITableView
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addNumber" {
             let indexPath = tableView.indexPathForSelectedRow!
-            let contact = contacts[indexPath.row]
+            
+            let contact : CNContact
+            if searchController.active && searchController.searchBar.text != "" {
+                contact = filteredContacts[indexPath.row]
+            } else {
+                contact = contacts[indexPath.row]
+            }
+            
             var numberFormatted : String
             
             if contact.phoneNumbers.count > 1 {
@@ -106,6 +138,7 @@ class ContactsViewController: UIViewController, UISearchBarDelegate, UITableView
                         vc.names = names
                         vc.numbers = numbers
                         print("numbers \(vc.numbers)")
+                        
                     }
                 }
             }else {
@@ -129,9 +162,12 @@ class ContactsViewController: UIViewController, UISearchBarDelegate, UITableView
                         vc.names = names
                         vc.numbers = numbers
                      print("numbers \(vc.numbers)")
+                   
                 }
             }
         }
+        searchController.searchBar.text = ""
+        
     }
 
         
@@ -208,8 +244,6 @@ class ContactsViewController: UIViewController, UISearchBarDelegate, UITableView
         // fetch the contact of matching names
         private func fetchContacts(name: String) -> [CNContact] {
             let store = CNContactStore()
-            
-            
             do {
                 let request = CNContactFetchRequest(keysToFetch: [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName), CNContactPhoneNumbersKey])
                 if name.isEmpty { // all search
@@ -241,6 +275,11 @@ class ContactsViewController: UIViewController, UISearchBarDelegate, UITableView
                 self.presentViewController(alert, animated: true, completion: nil)
                 })
         }
+}
+extension ContactsViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
 }
 
 

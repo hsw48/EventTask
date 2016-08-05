@@ -20,6 +20,8 @@
 		84822A6E1D5105DE007912DF /* DisplayMembersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84822A6D1D5105DE007912DF /* DisplayMembersTableViewController.swift */; };
 		84822A701D5109F3007912DF /* MembersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84822A6F1D5109F3007912DF /* MembersTableViewCell.swift */; };
 		84822A721D5144BF007912DF /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84822A711D5144BF007912DF /* UI.swift */; };
+		84D1EA4B1D52B633002E81EE /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D1EA491D52B633002E81EE /* Fabric.framework */; };
+		84D1EA4C1D52B633002E81EE /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D1EA4A1D52B633002E81EE /* Crashlytics.framework */; };
 		84DB19111D46C58900578FBC /* ClaimedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DB19101D46C58900578FBC /* ClaimedTableViewCell.swift */; };
 		84DB19131D46C59900578FBC /* UnclaimedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DB19121D46C59800578FBC /* UnclaimedTableViewCell.swift */; };
 		84E74A831D36C5B300FD56C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E74A821D36C5B300FD56C2 /* AppDelegate.swift */; };
@@ -38,7 +40,7 @@
 		84E74AAE1D37097100FD56C2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E74AAD1D37097100FD56C2 /* User.swift */; };
 		84E74AB01D38129200FD56C2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E74AAF1D38129200FD56C2 /* SignInViewController.swift */; };
 		84E74AB21D38472200FD56C2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E74AB11D38472200FD56C2 /* TabBarViewController.swift */; };
-		F93546740E4B6A1DCD172D80 /* Pods_EventTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2491A9AEACA4633F3775BB4C /* Pods_EventTask.framework */; };
+		E01BF9397D44648F607334AB /* Pods_iWill.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D19DB656E8B52C2BB7E35072 /* Pods_iWill.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,8 @@
 		84822A6D1D5105DE007912DF /* DisplayMembersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayMembersTableViewController.swift; sourceTree = "<group>"; };
 		84822A6F1D5109F3007912DF /* MembersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembersTableViewCell.swift; sourceTree = "<group>"; };
 		84822A711D5144BF007912DF /* UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
+		84D1EA491D52B633002E81EE /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		84D1EA4A1D52B633002E81EE /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		84DB19101D46C58900578FBC /* ClaimedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimedTableViewCell.swift; sourceTree = "<group>"; };
 		84DB19121D46C59800578FBC /* UnclaimedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnclaimedTableViewCell.swift; sourceTree = "<group>"; };
 		84E74A7F1D36C5B300FD56C2 /* iWill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWill.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +81,9 @@
 		84E74AAD1D37097100FD56C2 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		84E74AAF1D38129200FD56C2 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		84E74AB11D38472200FD56C2 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		8895F392F07C30883EAC7AD6 /* Pods-iWill.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWill.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iWill/Pods-iWill.debug.xcconfig"; sourceTree = "<group>"; };
+		C7E7486F04FAF4F31F9D0DE5 /* Pods-iWill.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iWill.release.xcconfig"; path = "Pods/Target Support Files/Pods-iWill/Pods-iWill.release.xcconfig"; sourceTree = "<group>"; };
+		D19DB656E8B52C2BB7E35072 /* Pods_iWill.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iWill.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6514667E435C3D50C94FA16 /* Pods-EventTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-EventTask/Pods-EventTask.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,7 +92,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F93546740E4B6A1DCD172D80 /* Pods_EventTask.framework in Frameworks */,
+				E01BF9397D44648F607334AB /* Pods_iWill.framework in Frameworks */,
+				84D1EA4C1D52B633002E81EE /* Crashlytics.framework in Frameworks */,
+				84D1EA4B1D52B633002E81EE /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +105,9 @@
 			isa = PBXGroup;
 			children = (
 				2491A9AEACA4633F3775BB4C /* Pods_EventTask.framework */,
+				D19DB656E8B52C2BB7E35072 /* Pods_iWill.framework */,
+				84D1EA491D52B633002E81EE /* Fabric.framework */,
+				84D1EA4A1D52B633002E81EE /* Crashlytics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -195,6 +207,8 @@
 			children = (
 				0AD2E17262ACA1BAAB8228C0 /* Pods-EventTask.debug.xcconfig */,
 				F6514667E435C3D50C94FA16 /* Pods-EventTask.release.xcconfig */,
+				8895F392F07C30883EAC7AD6 /* Pods-iWill.debug.xcconfig */,
+				C7E7486F04FAF4F31F9D0DE5 /* Pods-iWill.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -212,6 +226,7 @@
 				84E74A7D1D36C5B300FD56C2 /* Resources */,
 				5A92A5E60273B011F46E9673 /* [CP] Embed Pods Frameworks */,
 				B8FC16504BE2D30645FDE6D4 /* [CP] Copy Pods Resources */,
+				84D1EA481D52B4A3002E81EE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -299,8 +314,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EventTask/Pods-EventTask-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iWill/Pods-iWill-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		84D1EA481D52B4A3002E81EE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 6df8da13bbc6d51d23c150cf89403a5f37ab33d3 8f9e5e17ac61da02d54cfac060abc3ea35f438ee7545c620b2867ab9307ae59b";
 		};
 		B8FC16504BE2D30645FDE6D4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -314,7 +342,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EventTask/Pods-EventTask-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iWill/Pods-iWill-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -395,7 +423,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -441,6 +470,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -460,31 +490,41 @@
 		};
 		84E74A921D36C5B300FD56C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0AD2E17262ACA1BAAB8228C0 /* Pods-EventTask.debug.xcconfig */;
+			baseConfigurationReference = 8895F392F07C30883EAC7AD6 /* Pods-iWill.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = EventTask/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hsw.EventTask;
 				PRODUCT_NAME = iWill;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "44791353-a31c-46ce-8c27-e0a72be42d73";
 			};
 			name = Debug;
 		};
 		84E74A931D36C5B300FD56C2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F6514667E435C3D50C94FA16 /* Pods-EventTask.release.xcconfig */;
+			baseConfigurationReference = C7E7486F04FAF4F31F9D0DE5 /* Pods-iWill.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = EventTask/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hsw.EventTask;
 				PRODUCT_NAME = iWill;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "44791353-a31c-46ce-8c27-e0a72be42d73";
 			};
 			name = Release;
 		};

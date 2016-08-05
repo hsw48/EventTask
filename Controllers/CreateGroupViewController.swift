@@ -16,8 +16,7 @@ class CreateGroupViewController: UIViewController {
     var groupId : String?
     var numbers = [String]()
     var names = [String]()
-    
-    @IBOutlet weak var saveButton: UIButton!
+
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var addContactsButton: UIButton!
     @IBOutlet weak var groupNameTextField: UITextField!
@@ -40,7 +39,7 @@ class CreateGroupViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
      //   let groupsTableViewController = segue.destinationViewController as! GroupsTableViewController
         if segue.identifier == "cancel" {
-            print("Cancel")
+
         } else if segue.identifier == "save" {
             
             
@@ -79,28 +78,32 @@ class CreateGroupViewController: UIViewController {
             
             // add other people to Group via their mobile phone number
             for number in numbers {
-                print("number \(number)")
                 // check if phone number is in database: snapshot.value = phone number's userId
                     ref.child("Phone Numbers").child(number).observeEventType(.Value, withBlock: { snapshot in
                         
-                        if snapshot.value! is String {
-                            print("adding number")
-                            let newUserId = snapshot.value as! String
+                        if let value = snapshot.value {
+                            if value.length > 0 {
+                            
+                            
+                            print("value \(value)")
+                            let newUserId = value as! String
+                                print(newUserId)
                             ref.child("Users").child(newUserId).child("groups").updateChildValues(newGroup as [NSObject : AnyObject])
                         
                             // snapshot.value = phone number's userName
-                            let userName = ref.child("Users").child(newUserId).child("name")
-                            userName.observeEventType(.Value, withBlock: { snapshot in
+                            let userNameRef = ref.child("Users").child(newUserId).child("name")
+                            userNameRef.observeEventType(.Value, withBlock: { snapshot in
+                                print("value2 \(snapshot.value!)")
                                 let newUserName = snapshot.value as! String
                             
                                 event.userIds.append(newUserId)
                                 event.userNames.append(newUserName)
-                                print("done")
                                 let eventData : NSDictionary = ["name" : event.name, "noClaimed" : event.noClaimed, "noUnclaimed" : event.noUnclaimed, "noOfMembers" : event.userIds.count,"tasks" : event.tasks,"userNames" : event.userNames, "userIds" : event.userIds]
                                 
                                 let groupAutoIdref : FIRDatabaseReference = ref.child("Groups").child(uuid)
                                 groupAutoIdref.setValue(eventData)
                             })
+                            }
                         }
                     
                         else {print("phone number does not exist")}
@@ -140,9 +143,6 @@ class CreateGroupViewController: UIViewController {
         addContactsButton.layer.cornerRadius = 10
         addContactsButton.backgroundColor = purpleButtonColor
         addContactsButton.tintColor = fontColor
-      
-        saveButton.backgroundColor = orangeButtonColor
-        saveButton.tintColor = fontColor
        
         numbersTextView.backgroundColor = backgroundColor
     }

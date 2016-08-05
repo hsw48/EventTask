@@ -12,6 +12,7 @@ import FirebaseDatabase
 import FirebaseStorage
 import FirebaseAuth
 import FBSDKLoginKit
+import Crashlytics
 
 
 class GroupsTableViewController: UITableViewController {
@@ -32,22 +33,19 @@ class GroupsTableViewController: UITableViewController {
 
     }
 
+
+
     override func viewDidLoad(){
-    // ref = FIRDatabase.database().reference()
         self.tableView.reloadData()
         super.viewDidLoad()
-    //    self.groupNames = []
-    
     }
     
     override func viewWillAppear(animated: Bool) {
        
         if checkForUserSession() == .None {
-            print("called")
             showSignInViewController()
             return
         }
-        print("view will appear")
         ref = FIRDatabase.database().reference()
         let CURRENT_USER_GROUPS_REF = ref!.child("Users").child((FIRAuth.auth()?.currentUser!.uid)!).child("groups")
         CURRENT_USER_GROUPS_REF.observeEventType(.Value, withBlock: { snapshot in
@@ -101,7 +99,6 @@ class GroupsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("GroupCell", forIndexPath: indexPath) as! GroupTableViewCell
         let row = indexPath.row
-        print("tableView")
         //set labels of group cells
         let ref = FIRDatabase.database().reference()
         let nameRef = ref.child("Groups").child(groupKeys[row]!).child("name")
@@ -124,33 +121,26 @@ class GroupsTableViewController: UITableViewController {
                 let displayGroupViewController = segue.destinationViewController as! DisplayGroupViewController
                 let indexPath = tableView.indexPathForSelectedRow!
                 let groupId = groupKeys[indexPath.row]
-                print("Displaying a group")
                 
                 let ref = FIRDatabase.database().reference()
             
                 let groupRef = ref.child("Groups").child(groupId!)
-                print("groupNames \(self.groupNames)")
                 let newGroup = Group(name: self.groupNames[indexPath.row])
                                
                 groupRef.child("noClaimed").observeEventType(.Value, withBlock: { snapshot in
                     newGroup.noClaimed = (snapshot.value as! Int)
-                   // print("snapshot2 \(snapshot.value as! Int)")
                 })
                 groupRef.child("noOfMembers").observeEventType(.Value, withBlock: { snapshot in
                     newGroup.noOfMembers = (snapshot.value as! Int)
-                   // print("snapshot3 \(snapshot.value as! Int)")
                 })
                 groupRef.child("noUnclaimed").observeEventType(.Value, withBlock: { snapshot in
                     newGroup.noUnclaimed = (snapshot.value as! Int)
-                   // print("snapshot4 \(snapshot.value as! Int)")
                 })
                 groupRef.child("userNames").observeEventType(.Value, withBlock: { snapshot in
                    newGroup.userNames = (snapshot.value as! [String])
-                  //  print("snapshot5 \(snapshot.value as! [String])")
                 })
                 groupRef.child("userIds").observeEventType(.Value, withBlock: { snapshot in
                     newGroup.userIds = (snapshot.value as! [String])
-                 //   print("snapshot6 \(snapshot.value as! [String])")
                     
                 })
                 
@@ -183,7 +173,6 @@ class GroupsTableViewController: UITableViewController {
     }
     
     func showSignInViewController() {
-        print("show signin")
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc : UIViewController = storyboard.instantiateViewControllerWithIdentifier("SignInViewController")
         self.presentViewController(vc, animated: true, completion: nil)
