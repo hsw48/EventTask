@@ -42,8 +42,23 @@ class SignInViewController: UIViewController /* FBSDKLoginButtonDelegate */ {
    
     }
     
+    func userSignedUp() {
+        if checkForUserSession() != .None {
+              self.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+    
+    func checkForUserSession() -> String? {
+        let userDefaults = NSUserDefaults(suiteName: "session")
+        if let auth =  userDefaults?.stringForKey("auth") {
+            return auth
+        }
+        return .None
+    }
+    
     override func viewWillAppear(animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
+          userSignedUp()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -96,8 +111,7 @@ class SignInViewController: UIViewController /* FBSDKLoginButtonDelegate */ {
                     dispatch_async(dispatch_get_main_queue(), {
                         if error == nil {
                             saveSession(user!.uid)
-                              self.dismissViewControllerAnimated(true, completion: nil)
-                           
+                            self.dismissViewControllerAnimated(true, completion: nil)
                         } else {
                             self.presentAlertController("Error", message:
                                 error!.localizedDescription)

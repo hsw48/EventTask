@@ -94,24 +94,39 @@ class SignUpViewController: UIViewController {
                                 ref.child("Users").child(userID).setValue(fbUser)
                                 ref.child("Phone Numbers").child(phoneNumber).setValue(userID)
                             }
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                           
-                            
+                        
+                        FIRAuth.auth()?.signInWithEmail(emailAddress, password: password) { (user, error) in
+                            dispatch_async(dispatch_get_main_queue(), {
+                                if error == nil {
+                                    saveSession(user!.uid)
+                                    self.dismissViewControllerAnimated(true, completion: nil)
+                     
+                                } else {
+                                    self.presentAlertController("Error", message:
+                                    error!.localizedDescription)
+                                                
+                                    self.emailAddressTextField.text = ""
+                                    self.passwordTextField.text = ""
+                                }
+                            })
+                        }
+                       
+
+                        
+                        
                         } else {
                             self.presentAlertController("Error", message:
                                 error!.localizedDescription)
                             return
                         }
-                    })
-                }
-            } else {
-                self.presentAlertController("Error", message:
-                    "Enter valid email address")
-                return
+
+                
+                })
+                
             }
-            
         }
         
+        }
     }
     
     @IBAction func alreadyHaveAccount(sender: AnyObject) {

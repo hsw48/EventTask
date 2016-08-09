@@ -52,7 +52,7 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
         ref.child("Tasks").child(taskId!).child("dateClaimed").setValue(currentDate)
         getData()
     }
- 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addButton.backgroundColor = orangeButtonColor
@@ -113,7 +113,6 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
                 if snapshot.value as! NSObject == 0 {
                     unclaimedTasksLocal.append(String(task.key))
                 }
-                print("reload")
                 self.unclaimedTasks = unclaimedTasksLocal
                 self.tableView.reloadData()
             })
@@ -163,6 +162,12 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
             _ = unclaimedRef.observeEventType(.Value, withBlock: { snapshot in
                 let name = String(snapshot.value!).componentsSeparatedByString(" ")
                 cell.detailLabel.text = "Claimed by \(String(name[0])) \n on \(date)"
+            })
+            let doneRef = ref.child("Tasks").child(claimedTasks[row]!).child("done")
+            doneRef.observeEventType(.Value, withBlock: { snapshot in
+                if snapshot.value! as! NSObject == 1 {
+                     cell.backgroundColor = UIColor(red:0.78,green:0.90,blue:0.79,alpha:1)
+                }
             })
          return cell
             

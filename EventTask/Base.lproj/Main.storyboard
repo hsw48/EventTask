@@ -282,7 +282,7 @@
                                     <constraint firstAttribute="width" constant="80" id="Zcu-Ls-2OC"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iWill is a responsibility delegation app where users can create and volunteer for tasks " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgJ-MW-HaX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="i Will Do It is a responsibility delegation app where users can create and volunteer for tasks " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgJ-MW-HaX">
                                 <rect key="frame" x="54" y="120" width="266" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="266" id="Mwx-fn-s6p"/>
@@ -432,8 +432,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Add Members" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PrC-Mz-qjA">
-                                <rect key="frame" x="58" y="170" width="260" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Members" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PrC-Mz-qjA">
+                                <rect key="frame" x="58" y="171.5" width="260" height="22.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="260" id="hGt-Ic-5qC"/>
                                 </constraints>
@@ -441,16 +441,16 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bT0-U3-bdo">
-                                <rect key="frame" x="58" y="120" width="260" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bT0-U3-bdo">
+                                <rect key="frame" x="58" y="121.5" width="260" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="260" id="KS6-km-1LU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Group Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mys-yD-uct">
-                                <rect key="frame" x="58" y="84" width="260" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mys-yD-uct">
+                                <rect key="frame" x="58" y="84" width="260" height="22.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="260" id="cqb-ZV-Chv"/>
                                 </constraints>
@@ -458,8 +458,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sl7-dY-xLM">
-                                <rect key="frame" x="122" y="206" width="130" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sl7-dY-xLM">
+                                <rect key="frame" x="122" y="209" width="130" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="76O-zY-sSt"/>
                                 </constraints>
@@ -470,16 +470,16 @@
                                     <segue destination="qRQ-yE-UPM" kind="show" id="1je-lu-ko9"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="add by phone number" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KMp-B3-Hyx">
-                                <rect key="frame" x="97" y="246" width="180" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="add by phone number" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KMp-B3-Hyx">
+                                <rect key="frame" x="97" y="254" width="180" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="3Oh-eO-RhO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STQ-1F-iK6">
-                                <rect key="frame" x="282" y="244" width="40" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STQ-1F-iK6">
+                                <rect key="frame" x="282" y="254" width="40" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="X25-Uu-YYb"/>
                                 </constraints>
@@ -490,8 +490,8 @@
                                     <action selector="enterAction:" destination="rEy-rh-esx" eventType="touchUpInside" id="IKG-kg-c0b"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n29-hV-5ac">
-                                <rect key="frame" x="68" y="291" width="240" height="190"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="n29-hV-5ac">
+                                <rect key="frame" x="68" y="299" width="240" height="190"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="Xlp-bt-3N5"/>
@@ -501,7 +501,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="bT0-U3-bdo" firstAttribute="centerX" secondItem="y3b-rD-74k" secondAttribute="centerX" id="0lp-kf-Qpr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bT0-U3-bdo" secondAttribute="trailing" priority="750" constant="150" id="10m-Ny-DdU"/>
@@ -516,9 +516,9 @@
                             <constraint firstItem="STQ-1F-iK6" firstAttribute="leading" secondItem="KMp-B3-Hyx" secondAttribute="trailing" constant="5" id="Nyr-sr-ORi"/>
                             <constraint firstItem="PrC-Mz-qjA" firstAttribute="top" secondItem="bT0-U3-bdo" secondAttribute="bottom" constant="20" id="S0e-KC-1D0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Mys-yD-uct" secondAttribute="trailing" constant="150" id="Xeg-LZ-bo8"/>
-                            <constraint firstItem="KMp-B3-Hyx" firstAttribute="top" secondItem="Sl7-dY-xLM" secondAttribute="bottom" constant="10" id="b7s-ml-iBL"/>
+                            <constraint firstItem="KMp-B3-Hyx" firstAttribute="top" secondItem="Sl7-dY-xLM" secondAttribute="bottom" constant="15" id="b7s-ml-iBL"/>
                             <constraint firstItem="Mys-yD-uct" firstAttribute="centerX" secondItem="y3b-rD-74k" secondAttribute="centerX" id="bcb-5J-mvM"/>
-                            <constraint firstItem="STQ-1F-iK6" firstAttribute="top" secondItem="Sl7-dY-xLM" secondAttribute="bottom" constant="8" id="eKe-da-Axm"/>
+                            <constraint firstItem="STQ-1F-iK6" firstAttribute="top" secondItem="Sl7-dY-xLM" secondAttribute="bottom" constant="15" id="eKe-da-Axm"/>
                             <constraint firstItem="Mys-yD-uct" firstAttribute="top" secondItem="Uw9-dj-dMK" secondAttribute="bottom" constant="20" id="oPl-ji-NxB"/>
                             <constraint firstItem="KMp-B3-Hyx" firstAttribute="centerX" secondItem="y3b-rD-74k" secondAttribute="centerX" id="r1F-2K-Mlf"/>
                         </constraints>
@@ -1123,7 +1123,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="140" id="yjr-sC-yXQ"/>
                                 </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>

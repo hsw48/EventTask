@@ -42,20 +42,25 @@ func styleForTabBar() {
 
 var backgroundColor : UIColor{
     return UIColor(red:0.70, green:0.62, blue:0.86, alpha:1.0)
+   
+   // return  UIColor(red:0.42, green:0.55, blue:0.66, alpha:1.0)
 }
 
 var barTintColor: UIColor {
     return UIColor(red:0.40, green:0.23, blue:0.72, alpha:1.0)
+  //  return UIColor(red:0.20, green:0.36, blue:0.50, alpha:1.0)
 }
 
 // yellow: UIColor(red:1.00, green:1.00, blue:0.00, alpha:1.0)
 
 var orangeButtonColor: UIColor {
     return UIColor(red:1.00, green:0.57, blue:0.00, alpha:1.0)
+   // return UIColor(red:1.00, green:1.00, blue:0.00, alpha:1.0)
 }
 
 var purpleButtonColor: UIColor {
     return UIColor(red:0.27, green:0.15, blue:0.63, alpha:1.0)
+  //  return UIColor(red:0.05, green:0.22, blue:0.36, alpha:1.0)
 }
 
 var fontColor: UIColor {
