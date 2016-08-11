@@ -73,11 +73,14 @@ class AddMembersViewController: UIViewController, UISearchBarDelegate, UITableVi
         
         func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCellWithIdentifier(kCellID, forIndexPath: indexPath)
-            let contact : CNContact
+            var contact = CNContact()
             
             if searchController.active && searchController.searchBar.text != "" {
                 self.tableView.contentInset = UIEdgeInsetsMake(25, 0, 0, 0)
-                contact = filteredContacts[indexPath.row]
+                if filteredContacts.count == 0 {
+                    print("empty")
+                } else {
+                    contact = filteredContacts[indexPath.row] }
             } else {
                 contact = contacts[indexPath.row]
             }

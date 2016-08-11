@@ -23,7 +23,7 @@ class YourTasksTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         let tasksRef = ref.child("Users").child((FIRAuth.auth()?.currentUser)!.uid).child("tasks")
         tasksRef.observeEventType(.Value, withBlock: { snapshot in
-            if self.tasks.count < snapshot.children.allObjects.count {
+            if self.tasks.count != snapshot.children.allObjects.count {
                 self.tasks = []
                 if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                     for snap in snapshots {
@@ -37,7 +37,7 @@ class YourTasksTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool){
-        
+        self.tableView.reloadData()
         super.viewDidAppear(true)
     }
 
@@ -66,7 +66,6 @@ class YourTasksTableViewController: UITableViewController {
         
         let doneRef = ref.child("Tasks").child(tasks[row]!).child("done")
         doneRef.observeEventType(.Value, withBlock: { snapshot in
-            print("snapshotttt \(snapshot.value! as! NSObject)")
             if snapshot.value! as! NSObject == 0 {
                 cell.backgroundColor = UIColor(red:1,green:0.8,blue:0.82,alpha:1)
             } else if snapshot.value! as! NSObject == 1 {
@@ -77,17 +76,16 @@ class YourTasksTableViewController: UITableViewController {
         
         let nameRef = ref.child("Tasks").child(tasks[row]!).child("name")
         nameRef.observeEventType(.Value, withBlock: { snapshot in
-           
-            print("task name \(snapshot.value!)")
             cell.titleLabel.text = String(snapshot.value!)
         })
       
         let groupRef = ref.child("Tasks").child(tasks[row]!).child("group")
         groupRef.observeEventType(.Value, withBlock: { snapshot in
+            if snapshot.exists() {
             let groupNameRef = ref.child("Groups").child(snapshot.value as! String).child("name")
             groupNameRef.observeEventType(.Value, withBlock: { snapshot in
                 cell.detailLabel.text = String(snapshot.value!)
-            })
+            })}
         })
 
         return cell

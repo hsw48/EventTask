@@ -32,8 +32,15 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
         let ref = FIRDatabase.database().reference()
         ref.child("Tasks").child(taskId!).child("claimed").setValue(1)
         unclaimedTasks.removeAtIndex(button!.tag)
-        group!.noUnclaimed -= 1
-        ref.child("Groups").child(groupId!).child("noUnclaimed").setValue(group!.noUnclaimed)
+        
+        ref.child("Groups").child(groupId!).child("noUnclaimed").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            self.group!.noUnclaimed = (snapshot.value as! Int)
+            self.group!.noUnclaimed -= 1
+            ref.child("Groups").child(self.groupId!).child("noUnclaimed").setValue(self.group!.noUnclaimed)
+        })
+        
+        
+       
         if (FIRAuth.auth()?.currentUser!.displayName) != nil {
             ref.child("Tasks").child(taskId!).child("userNameClaimed").setValue((FIRAuth.auth()?.currentUser!.displayName)!)
         } else {
@@ -42,6 +49,7 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
         ref.child("Tasks").child(taskId!).child("userIdClaimed").setValue((FIRAuth.auth()?.currentUser!.uid)!)
         let newTask : NSDictionary = [taskId! : "https://eventtask-40794.firebaseio.com/Users/\((FIRAuth.auth()?.currentUser!.uid)!)/\(taskId)"]
         ref.child("Users").child((FIRAuth.auth()?.currentUser!.uid)!).child("tasks").updateChildValues((newTask as [NSObject : AnyObject]))
+        ref.child("Tasks").child(taskId!).child("done").setValue(2)
        
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = .MediumStyle
@@ -55,12 +63,17 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         addButton.backgroundColor = orangeButtonColor
         addButton.tintColor = fontColor
         segmentedControl.tintColor = purpleButtonColor
+
     }
     
+    
+    
     func getData(){
+        print("getting data")
         if self.segmentedControl.selectedSegmentIndex == 0 {
             createClaimedTasksArray()
         } else if segmentedControl.selectedSegmentIndex == 1{
@@ -70,14 +83,12 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
         
     
     func createClaimedTasksArray() {
-        print("creating claimed")
         var claimedTasksLocal = [String?]()
         var allTasks = [FIRDataSnapshot]()
         let ref = FIRDatabase.database().reference()
         let tasksRef = ref.child("Groups").child(groupId!).child("tasks")
         tasksRef.observeEventType(.Value, withBlock: {snapshot in
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                print("callback")
                 for snap in snapshots {
                     allTasks.append(snap)
                 }
@@ -96,14 +107,12 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
     }
         
     func createUnclaimedTasksArray() {
-         print("creating unclaimed")
         var unclaimedTasksLocal = [String?]()
         var allTasks = [FIRDataSnapshot]()
         let ref = FIRDatabase.database().reference()
         let tasksRef = ref.child("Groups").child(groupId!).child("tasks")
         tasksRef.observeEventType(.Value, withBlock: {snapshot in
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                 print("callback")
                 for snap in snapshots {
                     allTasks.append(snap)
                 }
@@ -144,7 +153,6 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if segmentedControl.selectedSegmentIndex == 0 {
             //claimed cell label
-            print("tablie view 0")
             let cell = tableView.dequeueReusableCellWithIdentifier("claimedCell", forIndexPath: indexPath) as! ClaimedTableViewCell
             
             let row = indexPath.row
@@ -173,7 +181,6 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
             
         } else {
             //unclaimed cell labels
-           print("tableview 1")
             let cell = tableView.dequeueReusableCellWithIdentifier("unclaimedCell", forIndexPath: indexPath) as! UnclaimedTableViewCell
             
             cell.claimButton.tag = indexPath.row
@@ -220,7 +227,23 @@ class DisplayGroupViewController: UIViewController, UITableViewDelegate {
     override func viewWillAppear(animated: Bool) {
         self.navigationItem.title = group!.name
         segmentedControl.selectedSegmentIndex = 1
+
         getData()
+        
+//        groupRef.child("noClaimed").observeEventType(.Value, withBlock: { snapshot in
+//            self.group!.noClaimed = (snapshot.value as! Int)
+//        })
+//        groupRef.child("noOfMembers").observeEventType(.Value, withBlock: { snapshot in
+//            self.group!.noOfMembers = (snapshot.value as! Int)
+//        })
+      
+//        groupRef.child("userNames").observeEventType(.Value, withBlock: { snapshot in
+//            self.group!.userNames = (snapshot.value as! [String])
+//        })
+//        groupRef.child("userIds").observeEventType(.Value, withBlock: { snapshot in
+//            self.group!.userIds = (snapshot.value as! [String])
+//        })
+        
     }
 
     override func didReceiveMemoryWarning() {

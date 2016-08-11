@@ -21,6 +21,7 @@ class GroupsTableViewController: UITableViewController {
     var groups = [Group]()
     var ref : FIRDatabaseReference?
     var groupNames = [String]()
+    var deleting = false
 
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     
@@ -51,7 +52,6 @@ class GroupsTableViewController: UITableViewController {
         CURRENT_USER_GROUPS_REF.observeEventType(.Value, withBlock: { snapshot in
             
                 //create array of user's groups
-                print("callback")
                 if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                     var tempItems = [FIRDataSnapshot]()
                     self.groupKeys = []
@@ -95,6 +95,54 @@ class GroupsTableViewController: UITableViewController {
        // print("groupkeys : \(groupKeys.count)")
         return rowCount
     }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            print("deleting")
+            deleting = true
+            let row = indexPath.row
+            let ref = FIRDatabase.database().reference()
+           // tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            var deletedTaskIds = [String]()
+            var members = [String]()
+            let tasksRef = ref.child("Groups").child(groupKeys[row]!).child("tasks")
+            tasksRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                    for snap in snapshots {
+                deletedTaskIds.append(snap.key)
+                    }
+                for task in deletedTaskIds {
+                    print("task \(task)")
+                    let idRef = ref.child("Tasks").child(task).child("userIdClaimed")
+                    idRef.observeEventType(.Value, withBlock: { snapshot in
+                    if snapshot.exists() {
+                            print("user \(snapshot.value as! String)")
+                            ref.child("Users").child(snapshot.value as! String).child("tasks").child(task).removeValue()
+                        }
+                            ref.child("Tasks").child(task).removeValue()
+                        })}
+                    }
+                    })
+        
+            let membersRef = ref.child("Groups").child(groupKeys[row]!).child("userIds")
+            membersRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+                print("member \(snapshot.value!)")
+                members = snapshot.value as! [String]
+                print("members \(members)")
+                for member in members {
+                    ref.child("Users").child(member).child("groups").child(self.groupKeys[row]!).removeValue()
+                }
+
+                ref.child("Groups").child(self.groupKeys[row]!).removeValue()
+                self.groupKeys.removeAtIndex(row)
+                self.groupNames.removeAtIndex(row)
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+             
+            })
+            
+
+        }
+    }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("GroupCell", forIndexPath: indexPath) as! GroupTableViewCell
@@ -115,34 +163,23 @@ class GroupsTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-       
-        
+        print("deleting = \(deleting)")
+        if deleting {
+            deleting = false
+            return
+        }else {
             if segue.identifier == "displayGroup" {
+                print("displaying group")
                 let displayGroupViewController = segue.destinationViewController as! DisplayGroupViewController
                 let indexPath = tableView.indexPathForSelectedRow!
                 let groupId = groupKeys[indexPath.row]
                 
                 let ref = FIRDatabase.database().reference()
             
-                let groupRef = ref.child("Groups").child(groupId!)
+                
                 let newGroup = Group(name: self.groupNames[indexPath.row])
                                
-                groupRef.child("noClaimed").observeEventType(.Value, withBlock: { snapshot in
-                    newGroup.noClaimed = (snapshot.value as! Int)
-                })
-                groupRef.child("noOfMembers").observeEventType(.Value, withBlock: { snapshot in
-                    newGroup.noOfMembers = (snapshot.value as! Int)
-                })
-                groupRef.child("noUnclaimed").observeEventType(.Value, withBlock: { snapshot in
-                    newGroup.noUnclaimed = (snapshot.value as! Int)
-                })
-                groupRef.child("userNames").observeEventType(.Value, withBlock: { snapshot in
-                   newGroup.userNames = (snapshot.value as! [String])
-                })
-                groupRef.child("userIds").observeEventType(.Value, withBlock: { snapshot in
-                    newGroup.userIds = (snapshot.value as! [String])
-                    
-                })
+            
                 
                     displayGroupViewController.group = newGroup
                     displayGroupViewController.groupId = groupId
@@ -153,6 +190,7 @@ class GroupsTableViewController: UITableViewController {
             else if segue.identifier == "logout" {
                let vc = segue.destinationViewController as! SignInViewController
                 vc.logoutIndex = 1
+            }
         }
     }
     
