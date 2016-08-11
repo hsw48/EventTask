@@ -829,6 +829,7 @@
                                 </variation>
                                 <connections>
                                     <action selector="claimButtonAction:" destination="a42-Hv-a8u" eventType="touchUpInside" id="eRy-75-gmc"/>
+                                    <segue destination="GJG-5q-4Yh" kind="unwind" identifier="claimTask" unwindAction="unwindSegue:" id="cOl-Tv-sI9"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Jq8-Ub-tBi">
@@ -876,6 +877,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M7U-ZI-JF6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="GJG-5q-4Yh" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2168.5" y="1208.5"/>
         </scene>

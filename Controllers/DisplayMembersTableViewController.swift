@@ -35,10 +35,36 @@ class DisplayMembersTableViewController: UITableViewController {
         if segue.identifier == "addMember" {
             let vc = segue.destinationViewController as! AddMembersViewController
             vc.groupId = groupId!
-            
         }
-        
     }
+    
+//    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        if editingStyle == .Delete {
+//            let row = indexPath.row
+//            let ref = FIRDatabase.database().reference()
+//            let membersRef = ref.child("Groups").child(self.groupId!).child("userIds")
+//            let userNameRef = ref.child("Groups").child(self.groupId!).child("userNames")
+//            let tasksRef = ref.child("Groups").child(self.groupId!).child("tasks")
+//            
+//            membersRef.observeEventType(.Value, withBlock: { snapshot in
+//                ref.child("Users").child(String(snapshot.value!)).child("tasks")
+//            })
+//            
+//            membersRef.observeEventType(.Value, withBlock: { snapshot in
+//                if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+//                    membersRef.child(String(snapshots[row].value!)).removeValue()
+//                    
+//                }
+//            })
+//            userNameRef.observeEventType(.Value, withBlock: { snapshot in
+//                if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+//                    userNameRef.child(String(snapshots[row].value!)).removeValue()
+//                }
+//            })
+//            
+//            
+//        }
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
