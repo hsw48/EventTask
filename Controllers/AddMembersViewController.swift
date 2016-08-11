@@ -60,6 +60,7 @@ class AddMembersViewController: UIViewController, UISearchBarDelegate, UITableVi
         
         func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
             contacts = fetchContacts(searchText)
+            filteredContacts = fetchContacts(searchText)
             tableView.reloadData()
         }
         
@@ -68,7 +69,11 @@ class AddMembersViewController: UIViewController, UISearchBarDelegate, UITableVi
         }
         
         func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            if searchController.active && searchController.searchBar.text != "" {
+                return filteredContacts.count
+            } else {
             return contacts.count
+            }
         }
         
         func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -77,10 +82,7 @@ class AddMembersViewController: UIViewController, UISearchBarDelegate, UITableVi
             
             if searchController.active && searchController.searchBar.text != "" {
                 self.tableView.contentInset = UIEdgeInsetsMake(25, 0, 0, 0)
-                if filteredContacts.count == 0 {
-                    print("empty")
-                } else {
-                    contact = filteredContacts[indexPath.row] }
+                    contact = filteredContacts[indexPath.row]
             } else {
                 contact = contacts[indexPath.row]
             }
