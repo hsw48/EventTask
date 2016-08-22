@@ -31,8 +31,11 @@ class DisplayTaskViewController: UIViewController {
         let ref = FIRDatabase.database().reference()
         ref.child("Tasks").child(taskId!).child("claimed").setValue(1)
         unclaimedTasks.removeAtIndex(button!.tag)
-        group!.noUnclaimed -= 1
-        ref.child("Groups").child(groupId!).child("noUnclaimed").setValue(group!.noUnclaimed)
+        ref.child("Groups").child(groupId!).child("noUnclaimed").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            self.group!.noUnclaimed = (snapshot.value as! Int)
+            self.group!.noUnclaimed -= 1
+            ref.child("Groups").child(self.groupId!).child("noUnclaimed").setValue(self.group!.noUnclaimed)
+        })
         if (FIRAuth.auth()?.currentUser!.displayName) != nil {
             ref.child("Tasks").child(taskId!).child("userNameClaimed").setValue((FIRAuth.auth()?.currentUser!.displayName)!)
         } else {
@@ -41,7 +44,7 @@ class DisplayTaskViewController: UIViewController {
         ref.child("Tasks").child(taskId!).child("userIdClaimed").setValue((FIRAuth.auth()?.currentUser!.uid)!)
         let newTask : NSDictionary = [taskId! : "https://eventtask-40794.firebaseio.com/Users/\((FIRAuth.auth()?.currentUser!.uid)!)/\(taskId)"]
         ref.child("Users").child((FIRAuth.auth()?.currentUser!.uid)!).child("tasks").updateChildValues((newTask as [NSObject : AnyObject]))
-        
+         ref.child("Tasks").child(taskId!).child("done").setValue(2)
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .NoStyle

@@ -71,6 +71,9 @@ class YourTasksTableViewController: UITableViewController {
             } else if snapshot.value! as! NSObject == 1 {
                 cell.backgroundColor = UIColor(red:0.78,green:0.90,blue:0.79,alpha:1)
             }
+            else {
+                cell.backgroundColor = UIColor.whiteColor()
+            }
             
         })
         

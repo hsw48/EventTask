@@ -31,11 +31,8 @@ class GroupsTableViewController: UITableViewController {
             defaults?.setObject(.None, forKey: "auth")
         }
         showSignInViewController()
-
     }
-
-
-
+    
     override func viewDidLoad(){
         self.tableView.reloadData()
         super.viewDidLoad()
@@ -130,6 +127,7 @@ class GroupsTableViewController: UITableViewController {
                 members = snapshot.value as! [String]
                 print("members \(members)")
                 for member in members {
+                    print("member: \(member)")
                     ref.child("Users").child(member).child("groups").child(self.groupKeys[row]!).removeValue()
                 }
 
@@ -173,16 +171,10 @@ class GroupsTableViewController: UITableViewController {
                 let displayGroupViewController = segue.destinationViewController as! DisplayGroupViewController
                 let indexPath = tableView.indexPathForSelectedRow!
                 let groupId = groupKeys[indexPath.row]
-                
-                let ref = FIRDatabase.database().reference()
-            
-                
+ 
                 let newGroup = Group(name: self.groupNames[indexPath.row])
-                               
-            
-                
-                    displayGroupViewController.group = newGroup
-                    displayGroupViewController.groupId = groupId
+                displayGroupViewController.group = newGroup
+                displayGroupViewController.groupId = groupId
             }
          else if segue.identifier == "addGroup" {
                 segue.destinationViewController as! CreateGroupViewController

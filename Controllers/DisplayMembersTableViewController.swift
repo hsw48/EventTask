@@ -21,13 +21,7 @@ class DisplayMembersTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let ref = FIRDatabase.database().reference().child("Groups").child(groupId!).child("userNames")
-        ref.observeEventType(.Value, withBlock: { snapshot in
-             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                self.rowCount = snapshots.count
-            }
-            self.tableView.reloadData()
-        })
+     
         
     }
     
@@ -74,12 +68,18 @@ class DisplayMembersTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        let ref = FIRDatabase.database().reference().child("Groups").child(groupId!).child("userNames")
+        ref.observeEventType(.Value, withBlock: { snapshot in
+            if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                self.rowCount = snapshots.count
+            }
+        })
+        
         return rowCount
     }
 
@@ -93,9 +93,9 @@ class DisplayMembersTableViewController: UITableViewController {
         
         membersRef.observeEventType(.Value, withBlock: { snapshot in
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
-               
-                    cell.titleLabel.text = String(snapshots[row].value!)
-                
+                if let title = snapshots[row].value {
+                    cell.titleLabel.text = String(title)
+                }
             }
         })
         

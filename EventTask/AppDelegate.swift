@@ -32,6 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self])
 
+//        let notificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
+//        let pushNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+//        
+//        application.registerUserNotificationSettings(pushNotificationSettings)
+//        application.registerForRemoteNotifications()
+       
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
 
 //       //  make sure user hadn't previously denied access
@@ -83,6 +89,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+//    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+//        // display the userInfo
+//        if let notification = userInfo["aps"] as? NSDictionary,
+//            let alert = notification["alert"] as? String {
+//            var alertCtrl = UIAlertController(title: "New Task", message: alert as String, preferredStyle: UIAlertControllerStyle.Alert)
+//            alertCtrl.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+//            // Find the presented VC...
+//            var presentedVC = self.window?.rootViewController
+//            while (presentedVC!.presentedViewController != nil)  {
+//                presentedVC = presentedVC!.presentedViewController
+//            }
+//            presentedVC!.presentViewController(alertCtrl, animated: true, completion: nil)
+//            
+//            // call the completion handler
+//            // -- pass in NoData, since no new data was fetched from the server.
+//            completionHandler(UIBackgroundFetchResult.NoData)
+//        }
+//    }
+//    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+//        if notificationSettings.types != .None {
+//            application.registerForRemoteNotifications()
+//        }
+//    }
+//
+//    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+//        let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
+//        var tokenString = ""
+//        
+//        for i in 0..<deviceToken.length {
+//            tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
+//        }
+//        
+//        print("Device Token:", tokenString)
+//    }
+//    
+//    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+//        print("Failed to register:", error)
+//    }
+//
+//    private func convertDeviceTokenToString(deviceToken:NSData) -> String {
+//        //  Convert binary Device Token to a String (and remove the <,> and white space charaters).
+//        var deviceTokenStr = deviceToken.description.stringByReplacingOccurrencesOfString(">", withString: "")
+//        deviceTokenStr = deviceTokenStr.stringByReplacingOccurrencesOfString("<", withString: "")
+//        deviceTokenStr = deviceTokenStr.stringByReplacingOccurrencesOfString(" ", withString: "")
+//        
+//        // Our API returns token in all uppercase, regardless how it was originally sent.
+//        // To make the two consistent, I am uppercasing the token string here.
+//        deviceTokenStr = deviceTokenStr.uppercaseString
+//        return deviceTokenStr
+//    }
+    
 
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
