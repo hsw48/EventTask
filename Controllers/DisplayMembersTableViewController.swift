@@ -21,7 +21,13 @@ class DisplayMembersTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+      let ref = FIRDatabase.database().reference().child("Groups").child(groupId!).child("userNames")
+              ref.observeEventType(.Value, withBlock: { snapshot in
+                if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                    self.rowCount = snapshots.count
+                      }
+                        self.tableView.reloadData()
+               })
         
     }
     
@@ -38,7 +44,7 @@ class DisplayMembersTableViewController: UITableViewController {
 //            let ref = FIRDatabase.database().reference()
 //            let membersRef = ref.child("Groups").child(self.groupId!).child("userIds")
 //            let userNameRef = ref.child("Groups").child(self.groupId!).child("userNames")
-//            let tasksRef = ref.child("Groups").child(self.groupId!).child("tasks")
+//           // let tasksRef = ref.child("Groups").child(self.groupId!).child("tasks")
 //            
 //            membersRef.observeEventType(.Value, withBlock: { snapshot in
 //                ref.child("Users").child(String(snapshot.value!)).child("tasks")
@@ -95,6 +101,7 @@ class DisplayMembersTableViewController: UITableViewController {
             if let snapshots = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 if let title = snapshots[row].value {
                     cell.titleLabel.text = String(title)
+                    print("title \(String(title))")
                 }
             }
         })
