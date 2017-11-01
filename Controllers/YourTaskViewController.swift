@@ -21,10 +21,12 @@ class YourTaskViewController: UIViewController {
     @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet weak var bodyTextView: UITextView!
     
+    // done button
     @IBAction func doneButtonAction(sender: AnyObject) {
         FIRDatabase.database().reference().child("Tasks").child(taskId!).child("done").setValue(1)
     }
     
+    // nevermind button
     @IBAction func nevermindButtonAction(sender: AnyObject) {
         let ref = FIRDatabase.database().reference()
         ref.child("Tasks").child(taskId!).child("claimed").setValue(0)
@@ -36,7 +38,8 @@ class YourTaskViewController: UIViewController {
             noUnclaimedRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
                 print("int \(Int(snapshot.value as! NSNumber))")
                 let noUnclaimed = Int(snapshot.value as! NSNumber)
-                noUnclaimedRef.setValue(noUnclaimed + 1)
+                let newUnclaimed = noUnclaimed + 1
+                noUnclaimedRef.setValue(newUnclaimed)
             })
         })
         

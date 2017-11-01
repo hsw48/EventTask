@@ -41,8 +41,18 @@ class CreateTaskViewController: UIViewController {
             let displayGroupViewController = segue.destinationViewController as! DisplayGroupViewController
             displayGroupViewController.group = group
             displayGroupViewController.groupId = groupId
+            let ref = FIRDatabase.database().reference()
+            // fixing unclaimed number error
+            var newUnclaimed = 0
+            ref.child("Groups").child(groupId!).child("noUnclaimed").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                newUnclaimed = Int(snapshot.value! as! NSNumber)
+                print("ref \(newUnclaimed)")
+                newUnclaimed += 1
+                ref.child("Groups").child(self.groupId!).child("noUnclaimed").setValue(newUnclaimed)
+            })
+     
             
-            group!.noUnclaimed += 1
+            //group!.noUnclaimed += 5
             
             var task = Task(name: "temp", body: "temp", datePosted: "temp", userPosted: "temp", groupId: "temp")
             if (FIRAuth.auth()?.currentUser!.displayName) != nil {
@@ -54,8 +64,12 @@ class CreateTaskViewController: UIViewController {
     
             let taskData : NSDictionary = ["name" : task.name, "body" : task.body, "datePosted" : task.datePosted, "userPosted" : task.userPosted, "group" : task.groupId!, "claimed" : task.claimed]
     
-            let ref = FIRDatabase.database().reference()
-            ref.child("Groups").child(groupId!).child("noUnclaimed").setValue(group!.noUnclaimed)
+            
+            print("New unclaimed \(newUnclaimed)")
+            
+            //ref.child("Groups").child(groupId!).child("noUnclaimed").setValue(group!.noUnclaimed)
+            //ref.child("Groups").child(groupId!).child("noUnclaimed").setValue(newUnclaimed)
+            
             let uuid = NSUUID().UUIDString
             let taskRef = ref.child("Tasks").child(uuid)
             taskRef.setValue(taskData)

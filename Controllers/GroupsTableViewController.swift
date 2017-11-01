@@ -69,6 +69,7 @@ class GroupsTableViewController: UITableViewController {
                 }
             })
         
+        
     }
     
     override func viewDidAppear(animated: Bool){
@@ -93,6 +94,7 @@ class GroupsTableViewController: UITableViewController {
         return rowCount
     }
     
+    // Delete a group (works but crashes the app... so it doesn't really work)
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             print("deleting")
@@ -193,6 +195,7 @@ class GroupsTableViewController: UITableViewController {
     @IBAction func unwindSegue(segue: UIStoryboardSegue) {
         
     }
+    // Verify user is logged in
     func checkForUserSession() -> String? {
         let userDefaults = NSUserDefaults(suiteName: "session")
         if let auth =  userDefaults?.stringForKey("auth") {
